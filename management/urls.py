@@ -13,20 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,patterns
 from django.contrib import admin
 from perf import views
 import xadmin
 xadmin.autodiscover()
 from xadmin.plugins import xversion
 xversion.register_models()
+from django.management import settings
 
 
 urlpatterns = [
 	url(r'^add/$',views.add),
 	#url(r'^admin', admin.site.urls),
-	url(r'^admin', xadmin.site.urls),
+	url(r'^481', xadmin.site.urls),
 	url(r'^excel_download/$',views.excel_output,name='excel_output'),
 	url(r'^count/$',views.count),
 	url(r'^verify/$',views.verify),
 ]
+
+if not settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
