@@ -8,5 +8,5 @@ whitenoise==3.2.1
 xadmin==0.6.1
 django-crispy-forms==1.6.0
 django-formtools==1.0
-httplib==0.9.2
+httplib2==0.9.2
 django-reversion
