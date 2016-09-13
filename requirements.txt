@@ -1,0 +1,7 @@
+dj-database-url
+Django==1.9.9
+django-postgrespool
+gunicorn
+psycopg2
+SQLAlchemy
+whitenoise
