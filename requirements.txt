@@ -5,3 +5,4 @@ gunicorn
 psycopg2
 SQLAlchemy
 whitenoise
+xadmin
