@@ -8,4 +8,4 @@ xlwt==1.1.2
 gunicorn==19.6.0
 psycopg2==2.6.2
 xadmin==0.6.1
-whitenoise
+whitenoise==3.2.1
