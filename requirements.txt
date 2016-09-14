@@ -8,3 +8,5 @@ virtualenv==15.0.3
 whitenoise==3.2.1
 xadmin==0.6.1
 xlwt==1.1.2
+gunicorn
+psycopg
