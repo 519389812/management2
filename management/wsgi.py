@@ -10,15 +10,15 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
+#from whitenoise.django import DjangoWhiteNoise
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "management.settings")
 
 application = get_wsgi_application()
-application = DjangoWhiteNoise(application)
+#application = DjangoWhiteNoise(application)
 
-from os.path import join,dirname,abspath
+#from os.path import join,dirname,abspath
  
-PROJECT_DIR1 = dirname(dirname(abspath(__file__)))
-import sys
-sys.path.insert(0,PROJECT_DIR1)
+#PROJECT_DIR = dirname(dirname(abspath(__file__)))
+#import sys
+#sys.path.insert(0,PROJECT_DIR)
