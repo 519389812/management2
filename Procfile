@@ -1,1 +1,1 @@
-web: python management/manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT management/settings.py; gunicorn management.wsgi --log-file -
+web: gunicorn management.wsgi --log-file -
