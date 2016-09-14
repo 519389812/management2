@@ -1,10 +1,4 @@
 Django==1.9.9
-django-crispy-forms
-django-formtools
-django-reversion
-django-xadmin
-httplib2
-xlwt
 gunicorn==19.6.0
 psycopg2==2.6.2
 xadmin==0.6.1
