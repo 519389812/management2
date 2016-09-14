@@ -27,7 +27,6 @@ SECRET_KEY = 'wkaz7zm(ja&s8*tktenv%mv*9oazppz+tl@ow7swelm%+6u$00'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-#ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -126,7 +125,9 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/ 
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
 
 #STATIC_URL = '/static/'
 
@@ -167,7 +168,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
