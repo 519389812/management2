@@ -7,6 +7,8 @@ from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 from datalib.models import Datalib
 from perf.models import Add
+import django.utils.timezone as timezone
+from django.contrib import admin
 
 class MainDashboard(object):
     widgets = [
@@ -210,19 +212,20 @@ xadmin.sites.site.register(IDC, IDCAdmin)
 xadmin.sites.site.register(AccessRecord, AccessRecordAdmin)
 
 class DatalibAdmin(object):
-	list_display = ('case_id', 'case_title', 'case_type','direct_liability','date')
+	list_display = ('case_id','case_title','case_type','destination','direct_liability','date')
 	list_display_links = ('case_id',)
-	list_filter = ('case_title', 'case_type', 'direct_liability', 'date')
+	list_filter = ('case_title', 'case_type','destination','direct_liability', 'date')
 	#list_editable = ['case_type', ]
-	search_fields = ('case_title', 'case_type','direct_liability','date')
+	search_fields = ('case_title','case_type','destination','direct_liability','date')
 	show_detail_fields = ('case_title',)
 xadmin.sites.site.register(Datalib, DatalibAdmin)
 
 class AddAdmin(object):
-	list_display = ('perf_id', 'name', 'team','performance','values','workload','point','date','verify')
+	list_display = ('perf_id','name', 'team','performance','values','workload','point','date','verify')
 	list_display_links = ('perf_id',)
 	list_filter = ('name','team','date','verify')
 	list_editable = ['verify', ]
 	search_fields = ('name', 'team', 'date', )
 	show_detail_fields = ('perf_id',)
+	readonly_fields = ['verify_auth', 'verify_date']
 xadmin.site.register(Add, AddAdmin)

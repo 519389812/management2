@@ -5,6 +5,7 @@ from django.db import models
 #from django import forms
 #from django.forms import ModelForm
 import django.utils.timezone as timezone
+from get_username import get_username
 
 # Create your models here.
 perf_choices = (
@@ -27,7 +28,6 @@ verify_choices = (
 	('已审核','已审核'),
 )
 
-
 class Add(models.Model):
 	perf_id = models.AutoField(primary_key=True,verbose_name='序号')
 	name = models.CharField(max_length=8,verbose_name='姓名')
@@ -37,15 +37,31 @@ class Add(models.Model):
 	workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
 	point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	date = models.DateField(default=timezone.now,verbose_name='日期')
-	verify = models.CharField(max_length=8,default='等待审核',choices=verify_choices,verbose_name='审核状态')
+	verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
+	verify_auth = models.CharField(max_length=8,verbose_name='审核人')
+	verify_date = models.DateTimeField(verbose_name='审核时间')
 		
 	def __unicode__(self):
 		return u'%s>>>>%s>>>>%s>>>>%s>>>>%s>>>>%s'%(self.name,self.team,self.workload,self.point,self.date,self.verify)
-		
-	class Meta:
-		verbose_name='摘要'
-		verbose_name_plural='绩效登记'
 
+	def save(self, *args, **kwargs):
+		req = get_username()
+#		print "Your username is : %s" %(req.user)
+		if self.verify == '等待审核':
+			super(Add, self).save(*args, **kwargs) # Call the "real" save() method.
+		if self.verify == '已审核':
+			self.verify_auth = str(req.user)
+			self.verify_date = timezone.now()
+			super(Add, self).save(*args, **kwargs) # Call the "real" save() method.
+		if self.verify == '未通过审核':
+			self.verify_auth = str(req.user)
+			self.verify_date = timezone.now()
+			super(Add, self).save(*args, **kwargs) # Call the "real" save() method.
+
+	class Meta:
+		verbose_name='绩效'
+		verbose_name_plural='绩效登记'
+	
 year_choices = (
 	(2016,'2016'),
 	#(2017,'2017'),
@@ -79,5 +95,5 @@ class Count(models.Model):
 		return u'%s>>>>%s>>>>%s>>>>%s>>>>%s'%(self.name,self.team,self.workload,self.point,self.date)
 		
 	class Meta:
-		verbose_name='摘要'
+		verbose_name='绩效统计'
 		verbose_name_plural='绩效统计'

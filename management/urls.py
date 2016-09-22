@@ -24,8 +24,9 @@ xversion.register_models()
 
 urlpatterns = [
 	url(r'^add/$',views.add),
-	#url(r'^admin', admin.site.urls),
-	url(r'^481', xadmin.site.urls),
+	url(r'^482/$',views.welcome),
+#	url(r'^admin', admin.site.urls),
+	url(r'^481/', xadmin.site.urls),
 	url(r'^excel_download/$',views.excel_output,name='excel_output'),
 	url(r'^count/$',views.count),
 	url(r'^verify/$',views.verify),

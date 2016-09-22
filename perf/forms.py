@@ -7,8 +7,8 @@ from perf.models import Add,Count
 from django.db import models
 
 class AddForm(ModelForm):
-	#workload = forms.FloatField(disabled=True,required=False)
-	#verify = forms.BooleanField(disabled=True)
+	#verify_date = forms.DateTimeField(disabled=True,required=False)
+	#verify_auth = forms.CharField(disabled=True,required=False)
 
 	class Meta:
 		model = Add

@@ -59,6 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'perf.get_username.RequestMiddleware',
 ]
 
 ROOT_URLCONF = 'management.urls'
@@ -183,4 +184,5 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+#上传至heroku时启用
 DATABASES['default'] =  dj_database_url.config()

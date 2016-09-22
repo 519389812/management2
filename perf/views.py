@@ -32,7 +32,7 @@ def add(req):
 				new_perf.point = perf_num*values_num
 			new_perf.save()
 			form.save_m2m()
-			return HttpResponse('提交成功！')
+			return HttpResponse('提交成功，请等待审核！')
 	else:
 		form = AddForm()
 	return render_to_response('add.html',{'form':form})
@@ -94,3 +94,6 @@ def verify(req):
 		list_detail.append(str(detail.name))
 		#dict_detail = {'姓名':detail.name,'室别':detail.team,'绩效类型':detail.performance,'绩效量':detail.values,'日期':str(detail.date)}
 	return JsonResponse(list_detail,safe=False)
+
+def welcome(req):
+    return render(req,'welcome.html')
