@@ -31,7 +31,7 @@ class Datalib(models.Model):
 	date = models.DateField(default=timezone.now,verbose_name='日期')#	case_img = models.FileField(upload_to='./upload')
 
 	def __unicode__(self):
-		return u'责任人：%s>>>>>>标题：%s>>>>>>日期：%s'%(self.direct_liability,self.case_title,self.date)
+		return u'责任人：%s | 标题：%s | 日期：%s'%(self.direct_liability,self.case_title,self.date)
 		
 	class Meta:
 		verbose_name='案例'

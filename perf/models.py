@@ -47,12 +47,12 @@ class Add(models.Model):
 	point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	date = models.DateField(default=timezone.now,verbose_name='日期')
 	verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
-	verify_auth = models.CharField(max_length=8,verbose_name='审核人',default='无')
+	verify_auth = models.CharField(max_length=8,verbose_name='审核人',default='NULL')
 	verify_date = models.DateTimeField(verbose_name='提交/审核时间',default=timezone.now)
 	comment = models.TextField(max_length=40,default='无',verbose_name='备注')
 		
 	def __unicode__(self):
-		return u'%s>>>>%s>>>>%s>>>>%s>>>>%s>>>>%s'%(self.name,self.team,self.workload,self.point,self.date,self.verify)
+		return u'姓名：%s | 室别：%s | 工作量：%s | 加分：%s | 日期：%s | 审核状态：%s'%(self.name,self.team,self.workload,self.point,self.date,self.verify)
 
 	def save(self, *args, **kwargs):
 		req = get_username()
