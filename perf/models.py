@@ -48,7 +48,7 @@ class Add(models.Model):
 	date = models.DateField(default=timezone.now,verbose_name='日期')
 	verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
 	verify_auth = models.CharField(max_length=8,verbose_name='审核人')
-	verify_date = models.DateTimeField(verbose_name='审核时间')
+	verify_date = models.DateTimeField(verbose_name='审核时间',null=True)
 	comment = models.TextField(max_length=40,default='无',verbose_name='备注')
 		
 	def __unicode__(self):
