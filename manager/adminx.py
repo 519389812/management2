@@ -227,5 +227,5 @@ class AddAdmin(object):
 	list_editable = ['verify', ]
 	search_fields = ('name', 'team', 'date', )
 	show_detail_fields = ('perf_id',)
-#	readonly_fields = ['verify_auth', 'verify_date']
+	readonly_fields = ['verify_auth', 'verify_date']
 xadmin.site.register(Add, AddAdmin)

@@ -9,10 +9,19 @@ from get_username import get_username
 
 # Create your models here.
 perf_choices = (
-	(15.0,'加柜台/小时'),
-	(5.0,'挑行李/件'),
-	(20.0,'协助481/小时'),
-	(10.0,'结关/班'),
+	(5.0,'挑行李   件/1次'),
+	(20.0,'网上值机/小时'),
+	(20.0,'团队托运/小时'),
+	(10.0,'值夜结关/班（请备注航班）'),
+	(10.0,'值夜数票/次'),
+	(15.0,'关封/班（请备注航班）'),
+	(20.0,'超大/小时'),
+	(20.0,'卡大包/小时'),
+	(20.0,'Q口引导/小时'),
+	(1.0,'加CZ柜台/小时'),
+	(1.0,'延时下班/小时'),
+	(1.0,'协助481工作/小时（如退关、送旅客、到B区拿行李等）（请备注）'),
+	(1.0,'其他   /小时/次/班（请备注）'),
 )
 
 team_choices = (
@@ -32,7 +41,7 @@ class Add(models.Model):
 	perf_id = models.AutoField(primary_key=True,verbose_name='序号')
 	name = models.CharField(max_length=8,verbose_name='姓名')
 	team = models.CharField(max_length=4,choices=team_choices,verbose_name='室别')
-	performance = models.FloatField(max_length=4,choices=perf_choices,verbose_name='加分项')
+	performance = models.FloatField(max_length=4,choices=perf_choices,verbose_name='项目')
 	values = models.FloatField(max_length=4,verbose_name='数值')
 	workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
 	point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
@@ -40,6 +49,7 @@ class Add(models.Model):
 	verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
 	verify_auth = models.CharField(max_length=8,verbose_name='审核人')
 	verify_date = models.DateTimeField(verbose_name='审核时间')
+	comment = models.TextField(max_length=40,default='无',verbose_name='备注')
 		
 	def __unicode__(self):
 		return u'%s>>>>%s>>>>%s>>>>%s>>>>%s>>>>%s'%(self.name,self.team,self.workload,self.point,self.date,self.verify)

@@ -23,11 +23,22 @@ def add(req):
 			values_num=form.cleaned_data['values']
 			new_perf=form.save(commit=False)
 			if perf_num == 5.0:
+				if values_num > 20:
+					new_perf.workload = 25
+				elif values_num > 15:
+					new_perf.workload = 20
+				elif values_num > 10:
+					new_perf.workload = 15
+				elif values_num > 5:
+					new_perf.workload = 10
+				else:
+					new_perf.workload = 5
+			elif perf_num == 20.0:
 				new_perf.workload = perf_num*values_num
 			elif perf_num == 10.0:
 				new_perf.workload = perf_num*values_num
 			elif perf_num == 15.0:
-				new_perf.point = perf_num*values_num
+				new_perf.workload = perf_num*values_num
 			else:
 				new_perf.point = perf_num*values_num
 			new_perf.save()

@@ -12,7 +12,7 @@ class AddForm(ModelForm):
 
 	class Meta:
 		model = Add
-		fields = ('name','team','performance','values','date')
+		fields = ('name','team','performance','values','date','comment')
 		
 class CountForm(ModelForm):
 	#year = forms.integerField(disabled=True,required=False)
