@@ -34,13 +34,29 @@ def add(req):
 				else:
 					new_perf.workload = 5
 			elif perf_num == 20.0:
-				new_perf.workload = perf_num*values_num
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 20.1:
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 20.2:
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 20.3:
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 20.4:
+				new_perf.workload = int(perf_num)*values_num
 			elif perf_num == 10.0:
-				new_perf.workload = perf_num*values_num
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 10.1:
+				new_perf.workload = int(perf_num)*values_num
 			elif perf_num == 15.0:
-				new_perf.workload = perf_num*values_num
+				new_perf.workload = int(perf_num)*values_num
+			elif perf_num == 1.0:
+				new_perf.point = int(perf_num)*values_num
+			elif perf_num == 1.1:
+				new_perf.point = int(perf_num)*values_num
+			elif perf_num == 1.2:
+				new_perf.point = int(perf_num)*values_num
 			else:
-				new_perf.point = perf_num*values_num
+				new_perf.point = int(perf_num)*values_num
 			new_perf.save()
 			form.save_m2m()
 			return HttpResponse('提交成功，请等待审核！')
