@@ -27,9 +27,9 @@ SECRET_KEY = 'wkaz7zm(ja&s8*tktenv%mv*9oazppz+tl@ow7swelm%+6u$00'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 #ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = ['.checkinlib.heroku.com']
+ALLOWED_HOSTS = ['.checkinlib.heroku.com']
 
 
 # Application definition
@@ -187,4 +187,4 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 #上传至heroku时启用
-#DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
