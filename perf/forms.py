@@ -20,7 +20,7 @@ class CountForm(ModelForm):
 
 	class Meta:
 		model = Count
-		fields = ('year','month')
+		fields = ('start_date','end_date')
 		
 class VerifyForm(ModelForm):
 	#workload = forms.FloatField(disabled=True,required=False)

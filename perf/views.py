@@ -11,6 +11,7 @@ import xlwt
 from cStringIO import StringIO
 from django.core.exceptions import ObjectDoesNotExist
 import json
+import datetime
 
 
 # Create your views here.
@@ -62,17 +63,17 @@ def add(req):
 			return HttpResponse('提交成功，请等待审核！')
 	else:
 		form = AddForm()
-	return render_to_response('add.html',{'form':form})
+	return render(req,'add.html',{'form':form})
 
 def excel_output(req):
 	wb = xlwt.Workbook(encoding = 'utf-8')
 	sheet = wb.add_sheet(u'统计')
 	response = HttpResponse(content_type='application/vnd.ms-excel')
-	response['Content-Disposition'] = 'attachment;filename=export_performance.xls'
+	response['Content-Disposition'] = 'attachment;filename=myperf.xls'
 	sheet.write(0,0, '姓名')
 	sheet.write(0,1, '室别')
-	sheet.write(0,2, '年份')
-	sheet.write(0,3, '月份')
+	sheet.write(0,2, '起始日期')
+	sheet.write(0,3, '截止日期')
 	sheet.write(0,4, '工作量')
 	sheet.write(0,5, '绩效加分')
 	
@@ -80,8 +81,8 @@ def excel_output(req):
 	for count in Count.objects.all():
 		sheet.write(row,0, count.name)
 		sheet.write(row,1, count.team)
-		sheet.write(row,2, count.year)
-		sheet.write(row,3, count.month)
+		sheet.write(row,2, str(count.start_date))
+		sheet.write(row,3, str(count.end_date))
 		sheet.write(row,4, count.workload)
 		sheet.write(row,5, count.point)
 		row = row + 1
@@ -97,9 +98,9 @@ def count(req):
 		form = CountForm(req.POST)
 		if form.is_valid():
 			Count.objects.all().delete()
-			date_year = form.cleaned_data['year']
-			date_month = form.cleaned_data['month']
-			sets = Add.objects.filter(date__year = date_year, date__month = date_month,verify = '等待审核')
+			date_from = form.cleaned_data['start_date']
+			date_until = form.cleaned_data['end_date']
+			sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核')
 			for set in sets:
 				if len(Count.objects.filter(name = set.name))>0:
 					get = Count.objects.get(name = set.name)
@@ -107,12 +108,12 @@ def count(req):
 					get.point = get.point + set.point
 					get.save()
 				else:
-					create = Count(name=set.name,team=set.team,workload=set.workload,point=set.point,year=date_year,month=date_month)
+					create = Count(name=set.name,team=set.team,workload=set.workload,point=set.point,start_date=date_from,end_date=date_until)
 					create.save()
 			return HttpResponseRedirect('/excel_download/')
 	else:
 		form = CountForm()
-	return render_to_response('count.html',{'form':form})
+	return render(req,'count.html',{'form':form})
 	
 def verify(req):
 	details = Add.objects.filter(verify='等待审核')
@@ -123,4 +124,4 @@ def verify(req):
 	return JsonResponse(list_detail,safe=False)
 
 def welcome(req):
-    return render(req,'welcome.html')
+	return render(req,'welcome.html')

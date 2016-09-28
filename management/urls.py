@@ -20,6 +20,7 @@ import xadmin
 xadmin.autodiscover()
 from xadmin.plugins import xversion
 xversion.register_models()
+from django.conf import settings
 
 
 urlpatterns = [

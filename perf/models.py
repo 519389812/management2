@@ -74,7 +74,7 @@ class Add(models.Model):
 	
 year_choices = (
 	(2016,'2016'),
-	#(2017,'2017'),
+	(2017,'2017'),
 )
 
 month_choices = (
@@ -95,14 +95,14 @@ month_choices = (
 class Count(models.Model):
 	name = models.CharField(max_length=8,verbose_name='姓名')
 	team = models.CharField(max_length=4,choices=team_choices,verbose_name='室别')
-	year = models.IntegerField(verbose_name='年份',choices=year_choices)
-	month = models.IntegerField(verbose_name='月份',choices=month_choices)
+	start_date = models.DateField(default=timezone.now,verbose_name='起始日期')
+	end_date = models.DateField(default=timezone.now,verbose_name='截止日期')
 	workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
 	point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 
 	
 	def __unicode__(self):
-		return u'%s>>>>%s>>>>%s>>>>%s>>>>%s'%(self.name,self.team,self.workload,self.point,self.date)
+		return u'%s|%s|%s|%s|%s|%s'%(self.name,self.team,self.workload,self.point,self.start_date,self.end_date)
 		
 	class Meta:
 		verbose_name='绩效统计'

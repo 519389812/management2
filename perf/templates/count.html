@@ -9,7 +9,7 @@
 <body>
 	<div id="count">  
 		<h1>绩效统计</h1>
-		<form action='.' method='POST'>
+		<form action='.' method='POST'>{% csrf_token %}
 			<table>
 				<input{{form}}></input>
 			</table>

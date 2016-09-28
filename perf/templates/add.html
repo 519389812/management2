@@ -12,7 +12,7 @@
 <body>
 	<div id="add">  
 		<h1>绩效登记</h1>
-		<form action='.' method='POST'>
+		<form action='.' method='POST'>{% csrf_token %}
 			<table>
 				<input{{form}}></input>
 			</table>
