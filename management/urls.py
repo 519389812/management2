@@ -31,4 +31,5 @@ urlpatterns = [
 	url(r'^excel_download/$',views.excel_output,name='excel_output'),
 	url(r'^count/$',views.count),
 	url(r'^verify/$',views.verify),
+	url(r'^success/$',views.success),
 ]

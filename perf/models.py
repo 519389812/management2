@@ -33,7 +33,7 @@ team_choices = (
 
 verify_choices = (
 	('等待审核','等待审核'),
-	('未通过审核','未通过审核'),
+	('未通过','未通过'),
 	('已审核','已审核'),
 )
 
@@ -63,7 +63,7 @@ class Add(models.Model):
 			self.verify_auth = str(req.user)
 			self.verify_date = timezone.now()
 			super(Add, self).save(*args, **kwargs) # Call the "real" save() method.
-		if self.verify == '未通过审核':
+		if self.verify == '未通过':
 			self.verify_auth = str(req.user)
 			self.verify_date = timezone.now()
 			super(Add, self).save(*args, **kwargs) # Call the "real" save() method.

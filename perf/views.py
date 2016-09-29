@@ -60,7 +60,7 @@ def add(req):
 				new_perf.point = int(perf_num)*values_num
 			new_perf.save()
 			form.save_m2m()
-			return HttpResponse('提交成功，请等待审核！')
+			return HttpResponseRedirect('/success/')
 	else:
 		form = AddForm()
 	return render(req,'add.html',{'form':form})
@@ -125,3 +125,6 @@ def verify(req):
 
 def welcome(req):
 	return render(req,'welcome.html')
+	
+def success(req):
+	return render(req,'success.html')
