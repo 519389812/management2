@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
-from perf.models import Add,Count
-from perf.forms import AddForm,CountForm,VerifyForm
+from perf.models import Add,Count,Addother,Countother
+from perf.forms import AddForm,CountForm,AddotherForm,CountotherForm
 import sqlite3
 import sys
 #from __future__ import unicode_literals
@@ -15,49 +15,118 @@ import datetime
 
 
 # Create your views here.
-
 def add(req):
+	workload_one = 0
+	workload_two = 0
+	workload_three = 0
+	point_one = 0
+	point_two = 0
+	point_three = 0
 	if req.method == 'POST':
 		form = AddForm(req.POST)
 		if form.is_valid():
 			perf_num=form.cleaned_data['performance']
 			values_num=form.cleaned_data['values']
+			perf_numtwo=form.cleaned_data['performancetwo']
+			values_numtwo=form.cleaned_data['valuestwo']
+			perf_numthree=form.cleaned_data['performancethree']
+			values_numthree=form.cleaned_data['valuesthree']
 			new_perf=form.save(commit=False)
-			if perf_num == 5.0:
+			if perf_num == 5.0:      #first round
 				if values_num > 20:
-					new_perf.workload = 25
+					workload_one = 25
 				elif values_num > 15:
-					new_perf.workload = 20
+					workload_one = 20
 				elif values_num > 10:
-					new_perf.workload = 15
+					workload_one = 15
 				elif values_num > 5:
-					new_perf.workload = 10
+					workload_one = 10
 				else:
-					new_perf.workload = 5
+					workload_one = 5
+			elif perf_num == 0.0:
+				workload_one = 0
 			elif perf_num == 20.0:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 20.1:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 20.2:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 20.3:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 20.4:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 10.0:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 10.1:
-				new_perf.workload = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			elif perf_num == 15.0:
-				new_perf.workload = int(perf_num)*values_num
-			elif perf_num == 1.0:
-				new_perf.point = int(perf_num)*values_num
-			elif perf_num == 1.1:
-				new_perf.point = int(perf_num)*values_num
-			elif perf_num == 1.2:
-				new_perf.point = int(perf_num)*values_num
+				workload_one = int(perf_num)*values_num
 			else:
-				new_perf.point = int(perf_num)*values_num
+				point_one = int(perf_num)*values_num
+			if perf_numtwo == 5.0:       #secend round
+				if values_numtwo > 20:
+					workload_two = 25
+				elif values_numtwo > 15:
+					workload_two = 20
+				elif values_numtwo > 10:
+					workload_two = 15
+				elif values_numtwo > 5:
+					workload_two = 10
+				else:
+					workload_two = 5
+			elif perf_numtwo == 0.0:
+				workload_two = 0
+			elif perf_numtwo == 20.0:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 20.1:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 20.2:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 20.3:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 20.4:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 10.0:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 10.1:
+				workload_two = int(perf_numtwo)*values_numtwo
+			elif perf_numtwo == 15.0:
+				workload_two = int(perf_numtwo)*values_numtwo
+			else:
+				point_two = int(perf_numtwo)*values_numtwo
+			if perf_numthree == 5.0:       #third round
+				if values_numthree > 20:
+					workload_three = 25
+				elif values_numthree > 15:
+					workload_three = 20
+				elif values_numthree > 10:
+					workload_three = 15
+				elif values_numthree > 5:
+					workload_three = 10
+				else:
+					workload_three = 5
+			elif perf_numthree == 0.0:
+				workload_three = 0
+			elif perf_numthree == 20.0:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 20.1:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 20.2:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 20.3:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 20.4:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 10.0:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 10.1:
+				workload_three = int(perf_numthree)*values_numthree
+			elif perf_numthree == 15.0:
+				workload_three = int(perf_numthree)*values_numthree
+			else:
+				point_three = int(perf_numthree)*values_numthree
+			new_perf.workload = workload_one + workload_two + workload_three
+			new_perf.point = point_one + point_two + point_three
 			new_perf.save()
 			form.save_m2m()
 			return HttpResponseRedirect('/success/')
@@ -65,7 +134,32 @@ def add(req):
 		form = AddForm()
 	return render(req,'add.html',{'form':form})
 
-def excel_output(req):
+#------------------------------------------------------------------------------#
+
+def addother(req):
+	if req.method == 'POST':
+		form = AddotherForm(req.POST)
+		if form.is_valid():
+			other_perf=form.save(commit=False)
+			if other_perf.airline == 252.001:
+				if other_perf.taskclass == 0.0:
+					other_perf.other_workload = round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+				elif other_perf.taskclass == 1.3:
+					other_perf.other_workload = 252 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+				elif other_perf.taskclass == 1.2:
+					other_perf.other_workload = 120.96 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+				else:
+					other_perf.other_workload = 110.88 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+			else:
+				other_perf.other_workload = round(other_perf.airline,1) * round(other_perf.taskclass,1) + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+			other_perf.save()
+			form.save_m2m()
+			return HttpResponseRedirect('/success/')
+	else:
+		form = AddotherForm()
+	return render(req,'add4.html',{'form':form})
+
+def count_output(req):
 	wb = xlwt.Workbook(encoding = 'utf-8')
 	sheet = wb.add_sheet(u'统计')
 	response = HttpResponse(content_type='application/vnd.ms-excel')
@@ -85,6 +179,34 @@ def excel_output(req):
 		sheet.write(row,3, str(count.end_date))
 		sheet.write(row,4, count.workload)
 		sheet.write(row,5, count.point)
+		row = row + 1
+
+	output = StringIO()
+	wb.save(output)
+	output.seek(0)
+	response.write(output.getvalue())
+	return response
+
+#-----------------------------------------------------------------------------------------------------------#
+
+def other_output(req):
+	wb = xlwt.Workbook(encoding = 'utf-8')
+	sheet = wb.add_sheet(u'统计')
+	response = HttpResponse(content_type='application/vnd.ms-excel')
+	response['Content-Disposition'] = 'attachment;filename=myotherperf.xls'
+	sheet.write(0,0, '姓名')
+	sheet.write(0,1, '室别')
+	sheet.write(0,2, '起始日期')
+	sheet.write(0,3, '截止日期')
+	sheet.write(0,4, '工作量')
+	
+	row = 1
+	for countother in Countother.objects.all():
+		sheet.write(row,0, countother.other_name)
+		sheet.write(row,1, countother.other_team)
+		sheet.write(row,2, str(countother.start_date))
+		sheet.write(row,3, str(countother.end_date))
+		sheet.write(row,4, countother.other_workload)
 		row = row + 1
 
 	output = StringIO()
@@ -114,7 +236,30 @@ def count(req):
 	else:
 		form = CountForm()
 	return render(req,'count.html',{'form':form})
-	
+
+#-----------------------------------------------------------------------------------------------------------------------#
+
+def countother(req):
+	if req.method == 'POST':
+		form = CountotherForm(req.POST)
+		if form.is_valid():
+			Countother.objects.all().delete()
+			date_from = form.cleaned_data['start_date']
+			date_until = form.cleaned_data['end_date']
+			sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核')
+			for set in sets:
+				if len(Countother.objects.filter(other_name = set.other_name))>0:
+					get = Countother.objects.get(other_name = set.other_name)
+					get.other_workload = get.other_workload + set.other_workload
+					get.save()
+				else:
+					create = Countother(other_name=set.other_name,other_team=set.other_team,other_workload=set.other_workload,start_date=date_from,end_date=date_until)
+					create.save()
+			return HttpResponseRedirect('/other_download/')
+	else:
+		form = CountotherForm()
+	return render(req,'countother.html',{'form':form})
+
 def verify(req):
 	details = Add.objects.filter(verify='等待审核')
 	list_detail = list()

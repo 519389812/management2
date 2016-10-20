@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>绩效登记</title>
+<title>外航统计</title>
+
 <link rel="stylesheet" type="text/css" href="Login.css"/>
 
 <style type="text/css">
@@ -61,7 +62,7 @@ margin-right: 6px;
 margin-top: 2px;
 outline: 0 none;
 padding: 5px 0px 5px 5px;
-width: 98%;
+width: 100%;
 border-radius: 4px;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
@@ -77,14 +78,14 @@ appearance:none;
 -moz-appearance: none;
 text-indent: 0.01px;
 text-overflow: '';
-width: 100%;
+width: 200%;
 height: 35px;
 line-height:15px;
 }
 .bootstrap-frm textarea{
 height:100px;
 padding: 5px 0px 0px 5px;
-width: 100%;
+width: 200%;
 }
 .bootstrap-frm .button {
 background: #FFF;
@@ -102,23 +103,17 @@ border-color: #ADADAD;
 </head>
 
 <body>
-	<div id="add"> 
+	<div id="countother">  
 		<form action='.' method='POST' class="bootstrap-frm">{% csrf_token %}
-			<h1>绩效登记
-			<span>
-			请按实际情况填写，所填内容将提交481进行 <a rel="nofollow" href="http://checkinlib.heroku.com/481">审核</a><br/>
-			点击此处 <a rel="nofollow" href="http://checkinlib.heroku.com/">返回</a>上一级</span>
-			
-			--------广告栏位--------
-			
-			</h1>
+			<h1>外航统计</h1>
+			</span><a rel="nofollow" href="http://checkinlib.heroku.com/481">返回</a></span>
 			<table>
 				<input{{form}}></input>
 			</table>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<button type='submit' value='提交' class="button">提交</button>
+			<button type='submit' class='button' value='下载'>下载</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" class="button" value="重置"></input>
+			<button type="reset" class="button" value="重置">重置</button>
 		</form>
 	</div>
 </body>

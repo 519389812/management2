@@ -25,11 +25,14 @@ from django.conf import settings
 
 urlpatterns = [
 	url(r'^add/$',views.add),
+	url(r'^addother/$',views.addother),
 	url(r'^$',views.welcome),
 #	url(r'^admin', admin.site.urls),
 	url(r'^481/', xadmin.site.urls),
-	url(r'^excel_download/$',views.excel_output,name='excel_output'),
+	url(r'^excel_download/$',views.count_output,name='cz_output'),
+	url(r'^other_download/$',views.other_output,name='other_output'),
 	url(r'^count/$',views.count),
+	url(r'^countother/$',views.countother),
 	url(r'^verify/$',views.verify),
 	url(r'^success/$',views.success),
 ]

@@ -1,13 +1,15 @@
 from django.contrib import admin
 import xadmin
 from manager.models import IDC, Host, MaintainLog, HostGroup, AccessRecord
-from perf.models import Add,Count
+from perf.models import Add,Count,Addother,Countother
 from datalib.models import Datalib
 
 # Register your models here.
 admin.site.register(Add)
 admin.site.register(Datalib)
+admin.site.register(Addother)
 #admin.site.register(Count)
+#admin.site.register(Countother)
 #admin.site.register(IDC)
 #admin.site.register(Host)
 #admin.site.register(MaintainLog)
@@ -16,7 +18,9 @@ admin.site.register(Datalib)
 
 #xadmin.site.register(Add)
 #xadmin.site.register(Datalib)
+#admin.site.register(Addother)
 #admin.site.register(Count)
+#admin.site.register(Countother)
 #xadmin.site.register(IDC)
 #xadmin.site.register(Host)
 #xadmin.site.register(MaintainLog)

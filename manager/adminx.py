@@ -6,7 +6,7 @@ from xadmin.layout import Main, TabHolder, Tab, Fieldset, Row, Col, AppendedText
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 from datalib.models import Datalib
-from perf.models import Add
+from perf.models import Add,Addother
 import django.utils.timezone as timezone
 from django.contrib import admin
 
@@ -221,11 +221,21 @@ class DatalibAdmin(object):
 xadmin.sites.site.register(Datalib, DatalibAdmin)
 
 class AddAdmin(object):
-	list_display = ('perf_id','name', 'team','performance','values','workload','point','date','verify')
+	list_display = ('perf_id','name', 'team','performance','values','performancetwo','valuestwo','performancethree','valuesthree','workload','point','supervisor','date','verify')
 	list_display_links = ('perf_id',)
-	list_filter = ('name','team','date','verify')
+	list_filter = ('name','team','supervisor','date','verify')
 	list_editable = ['verify', ]
-	search_fields = ('name', 'team', 'date', )
+	search_fields = ('name', 'team', 'supervisor', 'date', )
 	show_detail_fields = ('perf_id',)
 	readonly_fields = ['verify_auth', 'verify_date']
 xadmin.site.register(Add, AddAdmin)
+
+class AddotherAdmin(object):
+	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','other_workload','other_date','other_verify')
+	list_display_links = ('other_id',)
+	list_filter = ('other_name','other_team','other_date','other_verify')
+	list_editable = ['other_verify', ]
+	search_fields = ('other_name', 'other_team', 'other_date', )
+	show_detail_fields = ('other_id',)
+	readonly_fields = ['other_auth', 'other_verifydate']
+xadmin.site.register(Addother, AddotherAdmin)
