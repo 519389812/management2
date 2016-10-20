@@ -28,7 +28,7 @@ class CountForm(ModelForm):
 
 	class Meta:
 		model = Count
-		fields = ('start_date','end_date')
+		fields = ('team','start_date','end_date')
 
 class CountotherForm(ModelForm):
 	#year = forms.integerField(disabled=True,required=False)
@@ -36,7 +36,7 @@ class CountotherForm(ModelForm):
 
 	class Meta:
 		model = Countother
-		fields = ('start_date','end_date')
+		fields = ('other_team','start_date','end_date')
 		
 class VerifyForm(ModelForm):
 	#workload = forms.FloatField(disabled=True,required=False)

@@ -220,9 +220,13 @@ def count(req):
 		form = CountForm(req.POST)
 		if form.is_valid():
 			Count.objects.all().delete()
+			teamchoice = form.cleaned_data['team']
 			date_from = form.cleaned_data['start_date']
 			date_until = form.cleaned_data['end_date']
-			sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核')
+			if teamchoice == '全部':
+				sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核')
+			else:
+				sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核',team = teamchoice)
 			for set in sets:
 				if len(Count.objects.filter(name = set.name))>0:
 					get = Count.objects.get(name = set.name)
@@ -244,9 +248,13 @@ def countother(req):
 		form = CountotherForm(req.POST)
 		if form.is_valid():
 			Countother.objects.all().delete()
+			teamchoice = form.cleaned_data['other_team']
 			date_from = form.cleaned_data['start_date']
 			date_until = form.cleaned_data['end_date']
-			sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核')
+			if teamchoice == '全部':
+				sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核')
+			else:
+				sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核',other_team = teamchoice)
 			for set in sets:
 				if len(Countother.objects.filter(other_name = set.other_name))>0:
 					get = Countother.objects.get(other_name = set.other_name)

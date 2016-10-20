@@ -192,9 +192,17 @@ month_choices = (
 	(12,'12'),
 )
 
+other_team_choices = (
+	('全部','全部'),
+	('一室','一室'),
+	('二室','二室'),
+	('三室','三室'),
+	('团队','团队'),
+)
+
 class Count(models.Model):
 	name = models.CharField(max_length=8,verbose_name='姓名')
-	team = models.CharField(max_length=4,choices=team_choices,verbose_name='室别')
+	team = models.CharField(max_length=4,choices=other_team_choices,verbose_name='室别')
 	start_date = models.DateField(default=timezone.now,verbose_name='起始日期')
 	end_date = models.DateField(default=timezone.now,verbose_name='截止日期')
 	workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
@@ -212,7 +220,7 @@ class Count(models.Model):
 
 class Countother(models.Model):
 	other_name = models.CharField(max_length=8,verbose_name='姓名')
-	other_team = models.CharField(max_length=4,choices=team_choices,verbose_name='室别')
+	other_team = models.CharField(max_length=4,choices=other_team_choices,verbose_name='室别')
 	start_date = models.DateField(default=timezone.now,verbose_name='起始日期')
 	end_date = models.DateField(default=timezone.now,verbose_name='截止日期')
 	other_workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
