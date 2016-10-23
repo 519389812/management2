@@ -10,7 +10,7 @@ from get_username import get_username
 # Create your models here.
 perf_choices = (
 	(0.0,'无'),
-	(5.0,'挑行李   件/1次'),
+	(5.0,'挑行李件数/每次'),
 	(20.0,'网上值机/小时'),
 	(20.1,'团队托运/小时'),
 	(10.0,'值夜结关/班（请备注航班）'),
@@ -89,8 +89,8 @@ class Add(models.Model):
 
 taskone_choices = (
 	(0.0,'无'),
-	(10.001,'结关'),
-	(15.001,'送机'),
+	(10.001,'结关（至边检）'),
+	(15.001,'送机（至机口）'),
 )
 
 tasktwo_choices = (
@@ -125,8 +125,8 @@ airline_choices = (
 	(78.001,'SQ'),
 	(72.003,'TG'),
 	(78.002,'VN'),
+	(109.201,'VN503留守'),
 	(93.601,'VN549'),
-	(109.201,'VN549留守'),
 )
 
 verify_choices = (
