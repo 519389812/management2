@@ -154,17 +154,14 @@ class Addother(models.Model):
 	tasktwo = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务1',default=0.0)
 	taskthree = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务2',default=0.0)
 	taskfour = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务3',default=0.0)
-	taskfive = models.FloatField(max_length=8,choices=taskthree_choices,verbose_name='其他任务',default=0.0)
-	task_values = models.FloatField(max_length=4,verbose_name='数值',default=0)
 	other_workload = models.FloatField(max_length=8,default=0.0,verbose_name='绩效人数')
-	other_point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	other_date = models.DateField(default=timezone.now,verbose_name='日期')
 	other_verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
 	other_auth = models.CharField(max_length=8,verbose_name='审核人',default='NULL')
 	other_verifydate = models.DateTimeField(verbose_name='提交/审核时间',default=timezone.now)
 		
 	def __unicode__(self):
-		return u'姓名：%s | 外航：%s | 绩效人数：%s | 绩效加分：%s | 日期：%s | 审核状态：%s'%(self.other_name,self.airline,self.other_workload,self.other_point,self.other_date,self.other_verify)
+		return u'姓名：%s | 外航：%s | 绩效人数：%s | 日期：%s | 审核状态：%s'%(self.other_name,self.airline,self.other_workload,self.other_date,self.other_verify)
 
 	def save(self, *args, **kwargs):
 		req = get_username()

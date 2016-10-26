@@ -232,7 +232,7 @@ class AddAdmin(object):
 xadmin.site.register(Add, AddAdmin)
 
 class AddotherAdmin(object):
-	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','taskfive','task_values','other_workload','other_point','other_date','other_verify')
+	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','other_workload','other_date','other_verify')
 	list_display_links = ('other_id',)
 	list_filter = ('other_name','other_team','other_date','other_verify')
 	list_editable = ['other_verify', ]

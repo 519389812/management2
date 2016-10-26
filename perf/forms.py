@@ -20,7 +20,7 @@ class AddotherForm(ModelForm):
 
 	class Meta:
 		model = Addother
-		fields = ('other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','taskfive','task_values','other_date')
+		fields = ('other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','other_date')
 		
 class CountForm(ModelForm):
 	#year = forms.integerField(disabled=True,required=False)
