@@ -137,21 +137,62 @@ def add(req):
 #------------------------------------------------------------------------------#
 
 def addother(req):
+	workload_taskfive = 0
+	point_taskfive = 0
 	if req.method == 'POST':
 		form = AddotherForm(req.POST)
 		if form.is_valid():
+			taskfive_num=form.cleaned_data['taskfive']
+			taskfiveval_num=form.cleaned_data['task_values']
 			other_perf=form.save(commit=False)
+			if taskfive_num == 5.001:
+				if taskfiveval_num > 20:
+					workload_taskfive = 25
+				elif taskfiveval_num > 15:
+					workload_taskfive = 20
+				elif taskfiveval_num > 10:
+					workload_taskfive = 15
+				elif taskfiveval_num > 5:
+					workload_taskfive = 10
+				else:
+					workload_taskfive = 5
+			elif taskfive_num == 15.002:
+				workload_taskfive = round(taskfive_num,1) * taskfiveval_num
+			elif taskfive_num == 0.0:
+				workload_taskfive = 0
+			elif taskfive_num == 0.502:
+				if taskfiveval_num < 0.5:
+					other_perf.other_point = 0.5
+				else:
+					if other_perf.airline == 252.001:
+						other_perf.other_point = 0.5
+						workload_taskfive = taskfiveval_num / 3 * 110.88
+					else:
+						other_perf.other_point = 0.5
+						workload_taskfive = taskfiveval_num / 2.5 * other_perf.airline * 1.1	
+			else:
+				if taskfiveval_num < 0.5:
+					other_perf.other_point = 0.5
+				else:
+					if other_perf.airline == 252.001:
+						other_perf.taskclass = 0.0
+						other_perf.other_point = 0.5
+						workload_taskfive = taskfiveval_num / 3 * 110.88
+					else:
+						other_perf.taskclass = 0.0
+						other_perf.other_point = 0.5
+						workload_taskfive = taskfiveval_num / 2.5 * other_perf.airline * 1.1							
 			if other_perf.airline == 252.001:
 				if other_perf.taskclass == 0.0:
-					other_perf.other_workload = round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+					other_perf.other_workload = round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1) + round(workload_taskfive,2)
 				elif other_perf.taskclass == 1.3:
-					other_perf.other_workload = 252 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+					other_perf.other_workload = 252 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1) + round(workload_taskfive,2)
 				elif other_perf.taskclass == 1.2:
-					other_perf.other_workload = 120.96 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+					other_perf.other_workload = 120.96 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1) + round(workload_taskfive,2)
 				else:
-					other_perf.other_workload = 110.88 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+					other_perf.other_workload = 110.88 + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1) + round(workload_taskfive,2)
 			else:
-				other_perf.other_workload = round(other_perf.airline,1) * round(other_perf.taskclass,1) + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1)
+				other_perf.other_workload = round(other_perf.airline,1) * round(other_perf.taskclass,1) + round(other_perf.taskone,1) + round(other_perf.tasktwo,1) + round(other_perf.taskthree,1) + round(other_perf.taskfour,1) + round(workload_taskfive,2)
 			other_perf.save()
 			form.save_m2m()
 			return HttpResponseRedirect('/success/')
@@ -199,6 +240,7 @@ def other_output(req):
 	sheet.write(0,2, '起始日期')
 	sheet.write(0,3, '截止日期')
 	sheet.write(0,4, '工作量')
+	sheet.write(0,5, '加分')
 	
 	row = 1
 	for countother in Countother.objects.all():
@@ -207,6 +249,7 @@ def other_output(req):
 		sheet.write(row,2, str(countother.start_date))
 		sheet.write(row,3, str(countother.end_date))
 		sheet.write(row,4, countother.other_workload)
+		sheet.write(row,5, countother.other_point)
 		row = row + 1
 
 	output = StringIO()
@@ -259,9 +302,10 @@ def countother(req):
 				if len(Countother.objects.filter(other_name = set.other_name))>0:
 					get = Countother.objects.get(other_name = set.other_name)
 					get.other_workload = get.other_workload + set.other_workload
+					get.other_point = get.other_point + set.other_point
 					get.save()
 				else:
-					create = Countother(other_name=set.other_name,other_team=set.other_team,other_workload=set.other_workload,start_date=date_from,end_date=date_until)
+					create = Countother(other_name=set.other_name,other_team=set.other_team,other_workload=set.other_workload,other_point=set.other_point,start_date=date_from,end_date=date_until)
 					create.save()
 			return HttpResponseRedirect('/other_download/')
 	else:

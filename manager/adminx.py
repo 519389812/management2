@@ -9,18 +9,19 @@ from datalib.models import Datalib
 from perf.models import Add,Addother
 import django.utils.timezone as timezone
 from django.contrib import admin
+from xadmin.plugins.actions import BaseActionView
 
 class MainDashboard(object):
     widgets = [
         [
-            {"type": "html", "title": "Test Widget", "content": "<h3> Welcome to Xadmin! </h3><p>Join Online Group: <br/>QQ Qun : 282936295</p>"},
-            {"type": "chart", "model": "manager.accessrecord", 'chart': 'user_count', 'params': {'_p_date__gte': '2013-01-08', 'p': 1, '_p_date__lt': '2013-01-29'}},
-            {"type": "list", "model": "manager.host", 'params': {
-                'o':'-guarantee_date'}},
+            {"type": "html", "title": "欢迎！", "content": "<h3> 欢迎使用工作量自助登记系统! </h3><p>欢迎反馈您宝贵的意见和建议<br/>管理员:<br/>刘偲翀:15626293425<br/>梁良:18611282168</p>"},
+            #{"type": "chart", "model": "manager.accessrecord", 'chart': 'user_count', 'params': {'_p_date__gte': '2013-01-08', 'p': 1, '_p_date__lt': '2013-01-29'}},
+            #{"type": "list", "model": "manager.host", 'params': {
+            #    'o':'-guarantee_date'}},
         ],
         [
-            {"type": "qbutton", "title": "Quick Start", "btns": [{'model': Host}, {'model':IDC}, {'title': "Google", 'url': "http://www.google.com"}]},
-            {"type": "addform", "model": MaintainLog},
+            {"type": "qbutton", "title": "快速访问", "btns": [{"model": "perf.Add", "title": "CZ绩效审核"},{"model": "perf.Addother", "title": "外航绩效审核"},{"url": "https://checkinlib.heroku.com/count", "title": "绩效统计下载"},{"url": "https://checkinlib.heroku.com/countother", "title": "外航统计下载"}]},
+            #{"type": "addform", "model": MaintainLog},
         ]
     ]
 xadmin.sites.site.register(views.website.IndexView, MainDashboard)
@@ -231,7 +232,7 @@ class AddAdmin(object):
 xadmin.site.register(Add, AddAdmin)
 
 class AddotherAdmin(object):
-	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','other_workload','other_date','other_verify')
+	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','taskfive','task_values','other_workload','other_point','other_date','other_verify')
 	list_display_links = ('other_id',)
 	list_filter = ('other_name','other_team','other_date','other_verify')
 	list_editable = ['other_verify', ]
@@ -239,3 +240,4 @@ class AddotherAdmin(object):
 	show_detail_fields = ('other_id',)
 	readonly_fields = ['other_auth', 'other_verifydate']
 xadmin.site.register(Addother, AddotherAdmin)
+

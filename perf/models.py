@@ -85,6 +85,7 @@ class Add(models.Model):
 		verbose_name='绩效'
 		verbose_name_plural='绩效登记'
 
+
 #-------------------------------------------------------------------------------------#
 
 taskone_choices = (
@@ -102,10 +103,18 @@ tasktwo_choices = (
 	(20.002,'POST-FLT'),
 )
 
+taskthree_choices = (
+	(0.0,'无'),
+	(0.501,'加外航柜台（请在下方填写时长，单位“小时”）'),
+	(0.502,'延误留守（请在下方填写时长，单位“小时”）'),
+	(5.001,'外航挑行李件数（请在下方填写件数，单位“件/每次”）'),
+	(15.002,'货机结关（请在下方填写班次，只允许整数，单位“班”）'),
+)
+
 class_choices = (
 	(0.0,'无'),
-	(1.3,'组长'),
-	(1.2,'C舱'),
+	(1.3,'组长 + F/C舱'),
+	(1.2,'F/C舱'),
 	(1.1,'Y舱'),
 )
 
@@ -142,17 +151,20 @@ class Addother(models.Model):
 	airline = models.FloatField(max_length=10,choices=airline_choices,verbose_name='外航')
 	taskclass = models.FloatField(max_length=4,choices=class_choices,verbose_name='任务舱位',default=0.0)
 	taskone = models.FloatField(max_length=8,choices=taskone_choices,verbose_name='结送机',default=0.0)
-	tasktwo = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='其他任务1',default=0.0)
-	taskthree = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='其他任务2',default=0.0)
-	taskfour = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='其他任务3',default=0.0)
-	other_workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
+	tasktwo = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务1',default=0.0)
+	taskthree = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务2',default=0.0)
+	taskfour = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务3',default=0.0)
+	taskfive = models.FloatField(max_length=8,choices=taskthree_choices,verbose_name='其他任务',default=0.0)
+	task_values = models.FloatField(max_length=4,verbose_name='数值',default=0)
+	other_workload = models.FloatField(max_length=8,default=0.0,verbose_name='绩效人数')
+	other_point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	other_date = models.DateField(default=timezone.now,verbose_name='日期')
 	other_verify = models.CharField(max_length=10,default='等待审核',choices=verify_choices,verbose_name='审核状态')
 	other_auth = models.CharField(max_length=8,verbose_name='审核人',default='NULL')
 	other_verifydate = models.DateTimeField(verbose_name='提交/审核时间',default=timezone.now)
 		
 	def __unicode__(self):
-		return u'姓名：%s | 外航：%s | 绩效人数：%s | 日期：%s | 审核状态：%s'%(self.other_name,self.airline,self.other_workload,self.other_date,self.other_verify)
+		return u'姓名：%s | 外航：%s | 绩效人数：%s | 绩效加分：%s | 日期：%s | 审核状态：%s'%(self.other_name,self.airline,self.other_workload,self.other_point,self.other_date,self.other_verify)
 
 	def save(self, *args, **kwargs):
 		req = get_username()
@@ -223,10 +235,11 @@ class Countother(models.Model):
 	other_team = models.CharField(max_length=4,choices=other_team_choices,verbose_name='室别')
 	start_date = models.DateField(default=timezone.now,verbose_name='起始日期')
 	end_date = models.DateField(default=timezone.now,verbose_name='截止日期')
-	other_workload = models.FloatField(max_length=4,default=0.0,verbose_name='绩效人数')
+	other_workload = models.FloatField(max_length=8,default=0.0,verbose_name='绩效人数')
+	other_point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	
 	def __unicode__(self):
-		return u'%s|%s|%s|%s|%s'%(self.other_name,self.other_team,self.other_workload,self.start_date,self.end_date)
+		return u'%s|%s|%s|%s|%s|%s'%(self.other_name,self.other_team,self.other_workload,self.other_point,self.start_date,self.end_date)
 		
 	class Meta:
 		verbose_name='外航统计'
