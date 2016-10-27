@@ -10,19 +10,19 @@ from get_username import get_username
 # Create your models here.
 perf_choices = (
 	(0.0,'无'),
-	(5.0,'挑行李件数/每次'),
+	(5.0,'挑行李件数（填写【1】次挑行李的件数）'),
 	(20.0,'网上值机/小时'),
 	(20.1,'团队托运/小时'),
-	(10.0,'值夜结关/班（请备注航班）'),
+	(10.0,'值夜结关/班（填写【航班数】，航班号填写在备注栏）'),
 	(10.1,'值夜数票/次'),
-	(15.0,'关封/班（请备注航班）'),
+	(15.0,'关封/班（填写【航班数】，航班号填写在备注栏）'),
 	(20.2,'超大/小时'),
 	(20.3,'卡大包/小时'),
 	(20.4,'Q口引导/小时'),
 	(1.0,'加CZ柜台/小时'),
 	(1.1,'延时下班/小时'),
-	(1.2,'协助481工作/小时（如退关、送旅客、到B区拿行李等）（请备注）'),
-	(1.3,'其他   /小时/次/班（请备注）'),
+	(1.2,'协助481工作/小时（如退关、送旅客、到B区拿行李等，请备注）'),
+	(1.3,'其他/小时/次/班（请备注）'),
 )
 
 team_choices = (
@@ -39,9 +39,9 @@ verify_choices = (
 )
 
 supervisor_choices = (
-	('一室','一室（罗志璋、毛思嬴、赵臣等）'),
-	('二室','二室（姚秋焕、刘周敏、熊辉、杨仲贤等）'),
-	('三室','三室（卢亘、温志森、吴婕玲、刘偲翀、王佳、黄汝博等）'),
+	('一室','一室（罗志璋、毛思嬴等）'),
+	('二室','二室（姚秋焕、刘周敏等）'),
+	('三室','三室（卢亘、温志森等）'),
 	('团队','团队（吴玲、梁良等）'),
 )
 
@@ -105,10 +105,10 @@ tasktwo_choices = (
 
 taskthree_choices = (
 	(0.0,'无'),
-	(0.501,'加外航柜台（请在下方填写时长，单位“小时”）'),
-	(0.502,'延误留守（请在下方填写时长，单位“小时”）'),
-	(5.001,'外航挑行李件数（请在下方填写件数，单位“件/每次”）'),
-	(15.002,'货机结关（请在下方填写班次，只允许整数，单位“班”）'),
+	(0.501,'加外航柜台/小时（请在下方填写时长）'),
+	(0.502,'延误留守/小时（请在下方填写时长）'),
+	(5.001,'外航挑行李件数（请在下方填写件数）'),
+	(15.002,'货机结关/班（请在下方填写航班数，只允许整数）'),
 )
 
 class_choices = (
@@ -155,7 +155,7 @@ class Addother(models.Model):
 	taskthree = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务2',default=0.0)
 	taskfour = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务3',default=0.0)
 	taskfive = models.FloatField(max_length=8,choices=taskthree_choices,verbose_name='其他任务',default=0.0)
-	task_values = models.FloatField(max_length=4,verbose_name='数值',default=0)
+	task_values = models.FloatField(max_length=4,verbose_name='其他任务数值',default=0)
 	other_workload = models.FloatField(max_length=8,default=0.0,verbose_name='绩效人数')
 	other_point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	other_date = models.DateField(default=timezone.now,verbose_name='日期')

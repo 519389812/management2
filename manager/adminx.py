@@ -11,6 +11,22 @@ import django.utils.timezone as timezone
 from django.contrib import admin
 from xadmin.plugins.actions import BaseActionView
 
+
+		
+#class MyAction(BaseActionView):
+#	action_name = "批量修改为已审核"
+#	description = (u'批量修改为已审核')
+#	model_perm = 'change'
+#	def do_action(self,queryset):
+#		for obj in queryset:
+#			obj.verify = '已通过'
+#			obj.save()
+#		self.msg('设置成功', 'success')
+
+#	def queryset(self):
+#		return self.model._default_manager.get_queryset().filter()
+
+
 class MainDashboard(object):
     widgets = [
         [
@@ -41,7 +57,7 @@ class GlobalSetting(object):
     menu_style = 'default'#'accordion'
 	
     site_title = 'Check-in Lib'  #设置base_site.html的Title
-    site_footer = 'Check-in Lib'  #设置base_site.html的Footer
+    site_footer = 'Check-in Lib 1.1'  #设置base_site.html的Footer
 	
 	
 xadmin.sites.site.register(views.CommAdminView, GlobalSetting)
@@ -222,13 +238,14 @@ class DatalibAdmin(object):
 xadmin.sites.site.register(Datalib, DatalibAdmin)
 
 class AddAdmin(object):
-	list_display = ('perf_id','name', 'team','performance','values','performancetwo','valuestwo','performancethree','valuesthree','workload','point','supervisor','date','verify')
+	list_display = ('perf_id','name', 'team','performance','values','performancetwo','valuestwo','performancethree','valuesthree','workload','point','supervisor','date','verify','comment')
 	list_display_links = ('perf_id',)
 	list_filter = ('name','team','supervisor','date','verify')
 	list_editable = ['verify', ]
 	search_fields = ('name', 'team', 'supervisor', 'date', )
 	show_detail_fields = ('perf_id',)
 	readonly_fields = ['verify_auth', 'verify_date']
+#	actions = [MyAction, ]
 xadmin.site.register(Add, AddAdmin)
 
 class AddotherAdmin(object):
@@ -239,5 +256,6 @@ class AddotherAdmin(object):
 	search_fields = ('other_name', 'other_team', 'other_date', )
 	show_detail_fields = ('other_id',)
 	readonly_fields = ['other_auth', 'other_verifydate']
+#	actions = [MyAction, ]
 xadmin.site.register(Addother, AddotherAdmin)
 
