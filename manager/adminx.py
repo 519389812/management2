@@ -10,12 +10,12 @@ from perf.models import Add,Addother
 import django.utils.timezone as timezone
 from django.contrib import admin
 from xadmin.plugins.actions import BaseActionView
-
+from django.utils.translation import ugettext as _, ugettext_lazy
 
 		
 #class MyAction(BaseActionView):
 #	action_name = "批量修改为已审核"
-#	description = (u'批量修改为已审核')
+#	description = _(u'Test selected %(verbose_name_plural)s')
 #	model_perm = 'change'
 #	def do_action(self,queryset):
 #		for obj in queryset:
@@ -23,8 +23,6 @@ from xadmin.plugins.actions import BaseActionView
 #			obj.save()
 #		self.msg('设置成功', 'success')
 
-#	def queryset(self):
-#		return self.model._default_manager.get_queryset().filter()
 
 
 class MainDashboard(object):
