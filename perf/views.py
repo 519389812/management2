@@ -169,9 +169,25 @@ def addother(req):
 						workload_taskfive = taskfiveval_num / 3 * 110.88
 					else:
 						other_perf.other_point = 0.5
-						workload_taskfive = taskfiveval_num / 2.5 * other_perf.airline * 1.1	
+						workload_taskfive = taskfiveval_num / 2.5 * other_perf.airline * 1.1
+			elif taskfive_num == 0.503:
+				if other_perf.airline == 252.001:
+					other_perf.taskclass = 0.0
+					other_perf.other_point = 0.5
+					other_perf.task_values = 1.0
+					workload_taskfive = 252
+				else:
+					other_perf.taskclass = 0.0
+					other_perf.other_point = 0.5
+					other_perf.task_values = 1.0
+					workload_taskfive = 1.3 * other_perf.airline
+			elif taskfive_num == 0.504:
+				other_perf.taskclass = 0.0
+				other_perf.other_point = 0.5
+				other_perf.task_values = 1.0
 			else:
 				if taskfiveval_num < 0.5:
+					other_perf.taskclass = 0.0
 					other_perf.other_point = 0.5
 				else:
 					if other_perf.airline == 252.001:

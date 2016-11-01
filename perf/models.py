@@ -107,8 +107,10 @@ taskthree_choices = (
 	(0.0,'无'),
 	(0.501,'加外航柜台/小时（请在下方填写时长）'),
 	(0.502,'延误留守/小时（请在下方填写时长）'),
+	(0.503,'临时调任外航组长1次（下方无须填写数值，固定为1次）'),
 	(5.001,'外航挑行李件数（请在下方填写件数）'),
 	(15.002,'货机结关/班（请在下方填写航班数，只允许整数）'),
+	(0.504,'不上柜台，临时调配带机组1次（下方无须填写数值，固定为1次）'),
 )
 
 class_choices = (
@@ -119,23 +121,49 @@ class_choices = (
 )
 
 airline_choices = (
-	(252.001,'AF'),
-	(72.006,'BR'),
-	(72.007,'CI'),
-	(72.002,'JL'),
-	(84.002,'KA'),
-	(72.004,'KE'),
-	(72.001,'MH'),
-	(72.005,'OZ'),
-	(108.001,'OZ370+306'),
-	(115.201,'OZ356+306'),
-	(100.801,'OZ358+306'),
-	(84.001,'SU'),
-	(78.001,'SQ'),
-	(72.003,'TG'),
-	(78.002,'VN'),
-	(109.201,'VN503留守'),
-	(93.601,'VN549'),
+	(252.0001,'AF107'),
+	(72.0001,'BR708'),
+	(72.0002,'BR798'),
+	(72.0003,'B7520'),
+	(72.0004,'CI522'),
+	(72.0005,'JL088'),
+	(84.0001,'KA783'),
+	(84.0002,'KA789'),
+	(72.0006,'KE866'),
+	(72.0007,'MH377'),
+	(72.0008,'OZ370'),
+	(72.0009,'OZ356'),
+	(72.0011,'OZ358'),
+	(72.0012,'OZ306'),
+	(108.0001,'OZ370+306'),
+	(115.2001,'OZ356+306'),
+	(100.8001,'OZ358+306'),
+	(84.0003,'SU221'),
+	(78.0001,'SQ851'),
+	(78.0002,'SQ853'),
+	(72.0013,'TG669'),
+	(72.0014,'TG679'),
+	(78.0003,'VN503'),
+	(78.0004,'VN507'),
+	(109.2001,'VN503留守'),
+	(93.6001,'VN549'),
+	(252.001,'AF（禁选）'),
+	(72.006,'BR（禁选）'),
+	(72.007,'CI（禁选）'),
+	(72.002,'JL（禁选）'),
+	(84.002,'KA（禁选）'),
+	(72.004,'KE（禁选）'),
+	(72.001,'MH（禁选）'),
+	(72.005,'OZ（禁选）'),
+	(108.001,'OZ370+306（禁选）'),
+	(115.201,'OZ356+306（禁选）'),
+	(100.801,'OZ358+306（禁选）'),
+	(84.001,'SU（禁选）'),
+	(78.001,'SQ（禁选）'),
+	(72.003,'TG（禁选）'),
+	(78.002,'VN（禁选）'),
+	(109.201,'VN503留守（禁选）'),
+	(93.601,'VN549（禁选）'),
 )
 
 verify_choices = (
@@ -154,8 +182,8 @@ class Addother(models.Model):
 	tasktwo = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务1',default=0.0)
 	taskthree = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务2',default=0.0)
 	taskfour = models.FloatField(max_length=8,choices=tasktwo_choices,verbose_name='主要任务3',default=0.0)
-	taskfive = models.FloatField(max_length=8,choices=taskthree_choices,verbose_name='其他任务',default=0.0)
-	task_values = models.FloatField(max_length=4,verbose_name='其他任务数值',default=0)
+	taskfive = models.FloatField(max_length=8,choices=taskthree_choices,verbose_name='额外任务',default=0.0)
+	task_values = models.FloatField(max_length=4,verbose_name='额外任务数值',default=0)
 	other_workload = models.FloatField(max_length=8,default=0.0,verbose_name='绩效人数')
 	other_point = models.FloatField(max_length=4,default=0.0,verbose_name='绩效加分')
 	other_date = models.DateField(default=timezone.now,verbose_name='日期')

@@ -9,21 +9,61 @@ from datalib.models import Datalib
 from perf.models import Add,Addother
 import django.utils.timezone as timezone
 from django.contrib import admin
-from xadmin.plugins.actions import BaseActionView
+from django.http import HttpResponse,HttpResponseRedirect
+import copy
+from django import forms
+from django.db import models
+from django.core.exceptions import PermissionDenied
+from django.forms.models import modelform_factory
+from django.template.response import TemplateResponse
+from django.utils.encoding import force_unicode
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ugettext_lazy
+from xadmin.layout import FormHelper, Layout, Fieldset, Container, Col
+from xadmin.plugins.actions import BaseActionView, ACTION_CHECKBOX_NAME
+from xadmin.util import model_ngettext, vendor
+from xadmin.views.base import filter_hook
+from xadmin.views.edit import ModelFormAdminView
 
-		
-#class MyAction(BaseActionView):
-#	action_name = "批量修改为已审核"
-#	description = _(u'Test selected %(verbose_name_plural)s')
-#	model_perm = 'change'
-#	def do_action(self,queryset):
-#		for obj in queryset:
-#			obj.verify = '已通过'
-#			obj.save()
-#		self.msg('设置成功', 'success')
+class MyChangeVerifyAction(BaseActionView):
+	action_name = 'my_action1'
+	description = _(u'Test selected 批量设置已审核')
+	model_perm = 'change'
+	def do_action(self, queryset):
+		for obj in queryset:
+			obj.verify = '已审核'
+			obj.save()
+#		return HttpResponse('设置成功')
 
+class MyChangeUnverifyAction(BaseActionView):
+	action_name = 'my_action2'
+	description = _(u'Test selected 批量设置未通过')
+	model_perm = 'change'
+	def do_action(self, queryset):
+		for obj in queryset:
+			obj.verify = '未通过'
+			obj.save()
+#		return HttpResponse('设置成功')
 
+class MyChangeOtherVerifyAction(BaseActionView):
+	action_name = 'my_action3'
+	description = _(u'Test selected 批量设置已审核')
+	model_perm = 'change'
+	def do_action(self, queryset):
+		for obj in queryset:
+			obj.other_verify = '已审核'
+			obj.save()
+#		return HttpResponse('设置成功')
+
+class MyChangeOtherUnverifyAction(BaseActionView):
+	action_name = 'my_action4'
+	description = _(u'Test selected 批量设置未通过')
+	model_perm = 'change'
+	def do_action(self, queryset):
+		for obj in queryset:
+			obj.other_verify = '未通过'
+			obj.save()
+#		return HttpResponse('设置成功')
 
 class MainDashboard(object):
     widgets = [
@@ -55,7 +95,7 @@ class GlobalSetting(object):
     menu_style = 'default'#'accordion'
 	
     site_title = 'Check-in Lib'  #设置base_site.html的Title
-    site_footer = 'Check-in Lib 1.1'  #设置base_site.html的Footer
+    site_footer = 'Check-in Lib 1.2 2016'  #设置base_site.html的Footer
 	
 	
 xadmin.sites.site.register(views.CommAdminView, GlobalSetting)
@@ -243,17 +283,17 @@ class AddAdmin(object):
 	search_fields = ('name', 'team', 'supervisor', 'date', )
 	show_detail_fields = ('perf_id',)
 	readonly_fields = ['verify_auth', 'verify_date']
-#	actions = [MyAction, ]
+	actions = [MyChangeVerifyAction,MyChangeUnverifyAction, ]
 xadmin.site.register(Add, AddAdmin)
 
 class AddotherAdmin(object):
 	list_display = ('other_id','other_name','other_team','airline','taskclass','taskone','tasktwo','taskthree','taskfour','taskfive','task_values','other_workload','other_point','other_date','other_verify')
 	list_display_links = ('other_id',)
-	list_filter = ('other_name','other_team','other_date','other_verify')
+	list_filter = ('other_name','airline','other_team','other_date','other_verify')
 	list_editable = ['other_verify', ]
 	search_fields = ('other_name', 'other_team', 'other_date', )
 	show_detail_fields = ('other_id',)
 	readonly_fields = ['other_auth', 'other_verifydate']
-#	actions = [MyAction, ]
+	actions = [MyChangeOtherVerifyAction,MyChangeOtherUnverifyAction, ]
 xadmin.site.register(Addother, AddotherAdmin)
 
