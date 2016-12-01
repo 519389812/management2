@@ -95,7 +95,7 @@ class GlobalSetting(object):
     menu_style = 'default'#'accordion'
 	
     site_title = 'Check-in Lib'  #设置base_site.html的Title
-    site_footer = 'Check-in Lib 1.2 2016'  #设置base_site.html的Footer
+    site_footer = 'Check-in Lib 1.2 server since 2016-11-8'  #设置base_site.html的Footer
 	
 	
 xadmin.sites.site.register(views.CommAdminView, GlobalSetting)
