@@ -312,11 +312,11 @@ class DailyAdmin(object):
 xadmin.site.register(Daily, DailyAdmin)
 
 class StaffAdmin(object):
-	list_display = ('id','name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	list_display = ('id','name','eid','wid','group','birth','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
 	list_display_links = ('id',)
-	list_filter = ('name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
-	list_editable = ['name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status', ]
-	search_fields = ('name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	list_filter = ('name','eid','wid','group','birth','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	list_editable = ['name','eid','wid','group','birth','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status', ]
+	search_fields = ('name','eid','wid','group','birth','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
 	show_detail_fields = ('id',)
 #	readonly_fields = ['other_auth', 'other_verifydate']
 #	actions = [MyChangeOtherVerifyAction,MyChangeOtherUnverifyAction, ]

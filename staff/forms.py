@@ -12,4 +12,4 @@ class StaffForm(ModelForm):
 
 	class Meta:
 		model = Staff
-		fields = ('name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+		fields = ('name','eid','wid','group','birth','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
