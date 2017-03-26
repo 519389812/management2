@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from 
 
 # Create your models here.
 group_choices = (
@@ -37,7 +38,7 @@ class Staff(models.Model):
 	eid = models.IntegerField(verbose_name='员工号')
 	wid = models.IntegerField(verbose_name='工作号')
 	group = models.CharField(max_length=8,choices=group_choices,verbose_name='团队')
-	birth = models.DateField(verbose_name='生日',editable=False)
+	birth = models.DateField(verbose_name='生日')
 	eqmanage = models.IntegerField(choices=bool_choices,verbose_name='设备管理',default=0)
 	assistant = models.IntegerField(choices=bool_choices,verbose_name='外航助理',default=0)
 	groupleader = models.IntegerField(choices=bool_choices,verbose_name='组长',default=0)
