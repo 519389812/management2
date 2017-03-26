@@ -33,7 +33,7 @@ status_choices = (
 
 class Staff(models.Model):
 	id = models.AutoField(primary_key=True,verbose_name='序号')
-	name = models.CharField(max_length=8,verbose_name='姓名')
+	name = models.CharField(max_length=8,unique=True,verbose_name='姓名')
 	eid = models.IntegerField(verbose_name='员工号')
 	wid = models.IntegerField(verbose_name='工作号')
 	group = models.CharField(max_length=8,choices=group_choices,verbose_name='团队')
