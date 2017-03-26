@@ -1,0 +1,160 @@
+<?xml version="1.8" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://http://www.w3.org/TR/xhtml/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content=text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>绩效登记</title>
+<link rel="stylesheet" type="text/css" href="Login.css"/>  
+
+<style type="text/css">
+.bootstrap-frm {
+margin-left:auto;
+margin-right:auto;
+max-width: 500px;
+background: #FFF;
+padding: 20px 30px 20px 30px;
+font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #888;
+text-shadow: 1px 1px 1px #FFF;
+border:1px solid #DDD;
+border-radius: 5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+.bootstrap-frm h1 {
+font: 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
+padding: 0px 0px 10px 40px;
+display: block;
+border-bottom: 1px solid #DADADA;
+margin: -10px -30px 30px -30px;
+color: #888;
+}
+.bootstrap-frm h1>span {
+display: block;
+font-size: 11px;
+}
+.bootstrap-frm label {
+display: block;
+margin: 0px 0px 5px;
+}
+.bootstrap-frm label>span {
+float: left;
+width: 20%;
+text-align: right;
+padding-right: 10px;
+margin-top: 10px;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight: bold;
+}
+.bootstrap-frm input[type="text"], .bootstrap-frm input[type="date"], .bootstrap-frm textarea, .bootstrap-frm select{
+border: 1px solid #CCC;
+color: #888;
+height: 20px;
+line-height:15px;
+margin-bottom: 16px;
+margin-right: 6px;
+margin-top: 2px;
+outline: 0 none;
+padding: 5px 0px 5px 5px;
+width: 70%;
+border-radius: 4px;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.bootstrap-frm select {
+background: #FFF url('down-arrow.png') no-repeat right;
+background: #FFF url('down-arrow.png') no-repeat right;
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+width: 70%;
+height: 35px;
+line-height:15px;
+}
+.bootstrap-frm textarea{
+height:100px;
+padding: 5px 0px 0px 5px;
+width: 70%;
+}
+.bootstrap-frm .button {
+background: #FFF;
+border: 1px solid #CCC;
+padding: 10px 25px 10px 25px;
+color: #333;
+border-radius: 4px;
+}
+.bootstrap-frm .button:hover {
+color: #333;
+background-color: #EBEBEB;
+border-color: #ADADAD;
+}
+</style> 
+
+</head>
+
+<body>
+	<form action="" method="post" class="bootstrap-frm">{% csrf_token %}
+		<h1>绩效登记
+			<span>请按实际情况填写：</span>
+		</h1>
+		<label>
+			<span>姓名 :</span>
+			<input id="name" type="text" name="name" placeholder="请输入姓名" required/>
+		</label>
+		<label>
+			<span>室别 :</span>
+			<select name="team">
+				<option value="一室">一室</option>
+				<option value="二室">二室</option>
+				<option value="三室">三室</option>
+				<option value="团队">团队</option>
+			</select>
+		</label>
+		<label>
+			<span>项目 :</span>
+			<select name="performance">
+				<option value=5.0>挑行李   件/1次</option>
+				<option value=20.0>网上值机/小时</option>
+				<option value=20.1>团队托运/小时</option>
+				<option value=10.0>值夜结关/班（请备注航班）</option>
+				<option value=10.1>值夜数票/次</option>
+				<option value=15.0>关封/班（请备注航班）</option>
+				<option value=20.2>超大/小时</option>
+				<option value=20.3>卡大包/小时</option>
+				<option value=20.4>Q口引导/小时</option>
+				<option value=1.0>加CZ柜台/小时</option>
+				<option value=1.1>延时下班/小时</option>
+				<option value=1.2>协助481工作/小时（如退关、送旅客、到B区拿行李等）（请备注）</option>
+				<option value=1.3>其他工作   /小时/次/班（请备注）</option>
+			</select>
+		</label>
+		<label>
+			<span>数值 :</span>
+			<input id="values" type="text" name="values" placeholder="请输入多少小时/次/班" required/>
+		</label>
+		<label>
+			<span>日期 :</span>
+			<input id="date" type="date" name="date" required/>
+		</label>
+		<label>
+			<span>备注 :</span>
+				<input id="comment" type='text' name="comment" value="无" maxlength='40' placeholder="（选填）请备注详细情况"/>
+		</label>
+		<label>
+			<span>&nbsp;</span>
+			<input type="submit" class="button" value="提交">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" class="button" value="重置">
+		</label>
+	</form>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
-from perf.models import Add,Count,Addother,Countother
-from perf.forms import AddForm,CountForm,AddotherForm,CountotherForm
+from perf.models import Add,Addother
+from perf.forms import AddForm,AddotherForm
 import sqlite3
 import sys
 #from __future__ import unicode_literals
@@ -41,8 +41,10 @@ def add(req):
 					workload_one = 15
 				elif values_num > 5:
 					workload_one = 10
-				else:
+				elif values_num > 0:
 					workload_one = 5
+				else:
+					pass
 			elif perf_num == 0.0:
 				workload_one = 0
 			elif perf_num == 20.0:
@@ -72,8 +74,10 @@ def add(req):
 					workload_two = 15
 				elif values_numtwo > 5:
 					workload_two = 10
-				else:
+				elif values_numtwo > 0:
 					workload_two = 5
+				else:
+					pass
 			elif perf_numtwo == 0.0:
 				workload_two = 0
 			elif perf_numtwo == 20.0:
@@ -103,8 +107,10 @@ def add(req):
 					workload_three = 15
 				elif values_numthree > 5:
 					workload_three = 10
-				else:
+				elif values_numthree > 0:
 					workload_three = 5
+				else:
+					pass
 			elif perf_numthree == 0.0:
 				workload_three = 0
 			elif perf_numthree == 20.0:
@@ -154,8 +160,10 @@ def addother(req):
 					workload_taskfive = 15
 				elif taskfiveval_num > 5:
 					workload_taskfive = 10
-				else:
+				elif taskfiveval_num > 0:
 					workload_taskfive = 5
+				else:
+					pass
 			elif taskfive_num == 15.002:
 				workload_taskfive = round(taskfive_num,1) * taskfiveval_num
 			elif taskfive_num == 0.0:
@@ -216,128 +224,33 @@ def addother(req):
 		form = AddotherForm()
 	return render(req,'add4.html',{'form':form})
 
-def count_output(req):
-	wb = xlwt.Workbook(encoding = 'utf-8')
-	sheet = wb.add_sheet(u'统计')
-	response = HttpResponse(content_type='application/vnd.ms-excel')
-	response['Content-Disposition'] = 'attachment;filename=myperf.xls'
-	sheet.write(0,0, '姓名')
-	sheet.write(0,1, '室别')
-	sheet.write(0,2, '起始日期')
-	sheet.write(0,3, '截止日期')
-	sheet.write(0,4, '工作量')
-	sheet.write(0,5, '绩效加分')
-	
-	row = 1
-	for count in Count.objects.all():
-		sheet.write(row,0, count.name)
-		sheet.write(row,1, count.team)
-		sheet.write(row,2, str(count.start_date))
-		sheet.write(row,3, str(count.end_date))
-		sheet.write(row,4, count.workload)
-		sheet.write(row,5, count.point)
-		row = row + 1
-
-	output = StringIO()
-	wb.save(output)
-	output.seek(0)
-	response.write(output.getvalue())
-	return response
-
-#-----------------------------------------------------------------------------------------------------------#
-
-def other_output(req):
-	wb = xlwt.Workbook(encoding = 'utf-8')
-	sheet = wb.add_sheet(u'统计')
-	response = HttpResponse(content_type='application/vnd.ms-excel')
-	response['Content-Disposition'] = 'attachment;filename=myotherperf.xls'
-	sheet.write(0,0, '姓名')
-	sheet.write(0,1, '室别')
-	sheet.write(0,2, '起始日期')
-	sheet.write(0,3, '截止日期')
-	sheet.write(0,4, '工作量')
-	sheet.write(0,5, '加分')
-	
-	row = 1
-	for countother in Countother.objects.all():
-		sheet.write(row,0, countother.other_name)
-		sheet.write(row,1, countother.other_team)
-		sheet.write(row,2, str(countother.start_date))
-		sheet.write(row,3, str(countother.end_date))
-		sheet.write(row,4, countother.other_workload)
-		sheet.write(row,5, countother.other_point)
-		row = row + 1
-
-	output = StringIO()
-	wb.save(output)
-	output.seek(0)
-	response.write(output.getvalue())
-	return response
-
-def count(req):
-	if req.method == 'POST':
-		form = CountForm(req.POST)
-		if form.is_valid():
-			Count.objects.all().delete()
-			teamchoice = form.cleaned_data['team']
-			date_from = form.cleaned_data['start_date']
-			date_until = form.cleaned_data['end_date']
-			if teamchoice == '全部':
-				sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核')
-			else:
-				sets = Add.objects.filter(date__range=(date_from,date_until),verify = '已审核',team = teamchoice)
-			for set in sets:
-				if len(Count.objects.filter(name = set.name))>0:
-					get = Count.objects.get(name = set.name)
-					get.workload = get.workload + set.workload
-					get.point = get.point + set.point
-					get.save()
-				else:
-					create = Count(name=set.name,team=set.team,workload=set.workload,point=set.point,start_date=date_from,end_date=date_until)
-					create.save()
-			return HttpResponseRedirect('/excel_download/')
-	else:
-		form = CountForm()
-	return render(req,'count.html',{'form':form})
-
-#-----------------------------------------------------------------------------------------------------------------------#
-
-def countother(req):
-	if req.method == 'POST':
-		form = CountotherForm(req.POST)
-		if form.is_valid():
-			Countother.objects.all().delete()
-			teamchoice = form.cleaned_data['other_team']
-			date_from = form.cleaned_data['start_date']
-			date_until = form.cleaned_data['end_date']
-			if teamchoice == '全部':
-				sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核')
-			else:
-				sets = Addother.objects.filter(other_date__range=(date_from,date_until),other_verify = '已审核',other_team = teamchoice)
-			for set in sets:
-				if len(Countother.objects.filter(other_name = set.other_name))>0:
-					get = Countother.objects.get(other_name = set.other_name)
-					get.other_workload = get.other_workload + set.other_workload
-					get.other_point = get.other_point + set.other_point
-					get.save()
-				else:
-					create = Countother(other_name=set.other_name,other_team=set.other_team,other_workload=set.other_workload,other_point=set.other_point,start_date=date_from,end_date=date_until)
-					create.save()
-			return HttpResponseRedirect('/other_download/')
-	else:
-		form = CountotherForm()
-	return render(req,'countother.html',{'form':form})
-
-def verify(req):
-	details = Add.objects.filter(verify='等待审核')
-	list_detail = list()
-	for detail in details:
-		list_detail.append(str(detail.name))
-		#dict_detail = {'姓名':detail.name,'室别':detail.team,'绩效类型':detail.performance,'绩效量':detail.values,'日期':str(detail.date)}
-	return JsonResponse(list_detail,safe=False)
-
 def welcome(req):
-	return render(req,'welcome.html')
+	return render(req,'welcome1.html')
 	
 def success(req):
-	return render(req,'success.html')
+	return render(req,'success1.html')
+	
+def aboutus(req):
+	return render(req,'aboutus.html')
+	
+def contact(req):
+	return render(req,'contact.html')
+	
+def addcheck(request):
+	return render(request, 'add.html')
+
+def addothercheck(request):
+	return render(request, 'addother.html')
+	
+def validate(request):
+	name = request.GET['name']
+	namelist = []
+	allname = Staff.objects.all()
+	for get in allname:
+		namelist.append(get.name)
+	if name in namelist:
+		return HttpResponse('输入正确！')
+	elif name == '无':
+		return HttpResponse('')
+	else:
+		return HttpResponse('姓名错误或未录入档案！')

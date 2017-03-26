@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://http://www.w3.org/TR/xhtml/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content=text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>自查登记</title>
+
+<style>
+.smart-green {
+margin-left:auto;
+margin-right:auto;
+max-width: 500px;
+background: #F8F8F8;
+padding: 30px 30px 20px 30px;
+font: 12px Arial, Helvetica, sans-serif;
+color: #666;
+border-radius: 5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+.smart-green h1 {
+font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+padding: 20px 0px 20px 40px;
+display: block;
+margin: -30px -30px 10px -30px;
+color: #FFF;
+background: #9DC45F;
+text-shadow: 1px 1px 1px #949494;
+border-radius: 5px 5px 0px 0px;
+-webkit-border-radius: 5px 5px 0px 0px;
+-moz-border-radius: 5px 5px 0px 0px;
+border-bottom:1px solid #89AF4C;
+}
+.smart-green h1>span {
+display: block;
+font-size: 11px;
+color: #FFF;
+}
+.smart-green label {
+display: block;
+margin: 0px 0px 5px;
+}
+.smart-green label>span {
+float: left;
+margin-top: 10px;
+color: #5E5E5E;
+}
+.smart-green input[type="text"], .smart-green input[type="date"], .smart-green textarea,.smart-green select {
+color: #555;
+height: 30px;
+line-height:30px;
+width: 55%;
+padding: 0px 0px 0px 10px;
+margin-top: 2px;
+border: 1px solid #E5E5E5;
+background: #FBFBFB;
+outline: 0;
+-webkit-box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+font: normal 11px/15px Arial, Helvetica, sans-serif;
+}
+.smart-green textarea{
+height:100px;
+padding-top: 10px;
+}
+.smart-green select {
+background: url('down-arrow.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB0%, #E9E9E9 100%);
+background: url('down-arrow.png') no-repeat right, -webkit-gradient(linear, left top, leftbottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+width:57.8%;
+height:30px;
+}
+.smart-green .button {
+background-color: #9DC45F;
+border-radius: 5px;
+-webkit-border-radius: 5px;
+-moz-border-border-radius: 5px;
+border: none;
+padding: 10px 25px 10px 25px;
+color: #FFF;
+text-shadow: 1px 1px 1px #949494;
+}
+.smart-green .button:hover {
+background-color:#80A24A;
+}
+
+</style>
+
+<script src="../../static/js/jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('.input').focus(function(){
+		var name = $(this).val();
+		
+		if (name == '无')
+		{
+		$(this).val('')
+		}
+	});
+})
+
+$(document).ready(function(){
+	$('#name1').blur(function(){
+		var name = $('#name1').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result1').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result1').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name2').blur(function(){
+		var name = $('#name2').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result2').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result2').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name3').blur(function(){
+		var name = $('#name3').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result3').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result3').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name4').blur(function(){
+		var name = $('#name4').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result4').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result4').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name5').blur(function(){
+		var name = $('#name5').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result5').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result5').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name6').blur(function(){
+		var name = $('#name6').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result6').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result6').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name7').blur(function(){
+		var name = $('#name7').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result7').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result7').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name8').blur(function(){
+		var name = $('#name8').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result8').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result8').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name9').blur(function(){
+		var name = $('#name9').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result9').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result9').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#name10').blur(function(){
+		var name = $('#name10').val();
+		
+		if (name == '')
+		{
+		$(this).val('无',function(){
+			$.get("/validate/",{'name':name}, function(ret){
+				$('#result10').html(ret)
+			});
+		});
+		}
+		
+		else
+		{
+		$.get("/validate/",{'name':name}, function(ret){
+			$('#result10').html(ret)
+		});
+		}
+	});
+});
+
+$(document).ready(function(){
+	$('#button1').click(function(){
+		$('#button1').hide('slow',function(){
+			$('#div1').show('fast',function(){
+				$('#div2').show('fast',function(){
+					$('#div3').show('fast',function(){
+						$('#div4').show('fast',function(){
+							$('#div5').show('fast');
+						});
+					});
+				});
+			});
+		});
+	});
+})
+
+</script>
+
+</head>
+
+<body class="smart-green">
+	<h1>检查录入：</h1>   
+	<form action="/daily/" method="post">
+	{% csrf_token %}
+		<br/>
+		<div>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期: <input type="date" id='date1' placeholder="请输入日期" required="required" name="date"></div><br/>
+		<div>项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目: <select type="select" class='select' id='select1' required="required" name="subject">
+				<option value=2.01>G19自查合格</option>
+				<option value=1.01>G19自查不合格</option>
+				<option value=2.02>微笑服务</option>
+				<option value=1.02>微笑服务不合格</option>
+				<option value=5.01>南航表扬信</option>
+				<option value=5.02>外航表扬信</option>
+				<option value=5.03>5星</option>
+				<option value=5.04>3星</option>
+				<option value=5.05>迟到</option>
+				<option value=10.01>病假</option>
+				<option value=5.06>宣传报道</option>
+				<option value=5.07>投诉</option>
+				<option value=2.03>一般差错</option>
+				<option value=5.08>中等差错</option>
+				<option value=10.02>严重差错</option>
+				</select></div><br/>
+		<div>航空公司: <select type="select" class='select' id='select2' default=CZ name="airlinecode">
+				<option value=CZ>CZ</option>
+				<option value=AF>AF</option>
+				<option value=BR>BR</option>
+				<option value=CI>CI</option>
+				<option value=JL>JL</option>
+				<option value=KA>KA</option>
+				<option value=KE>KE</option>
+				<option value=MH>MH</option>
+				<option value=OZ>OZ</option>
+				<option value=SU>SU</option>
+				<option value=SQ>SQ</option>
+				<option value=TG>TG</option>
+				<option value=VN>VN</option>
+				</select></div><br/>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名1: <input type="text" class='input' id='name1' placeholder="请输入姓名" name="nameone" value='无'></input><span id='result1' style=color:red></span></div>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名2: <input type="text" class='input' id='name2' placeholder="请输入姓名" name="nametwo" value='无'></input><span id='result2' style=color:red></span></div>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名3: <input type="text" class='input' id='name3' placeholder="请输入姓名" name="namethree" value='无'></input><span id='result3' style=color:red></span></div>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名4: <input type="text" class='input' id='name4' placeholder="请输入姓名" name="namefour" value='无'></input><span id='result4' style=color:red></span></div>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名5: <input type="text" class='input' id='name5' placeholder="请输入姓名" name="namefive" value='无'></input><span id='result5' style=color:red></span></div>
+		<div id='div1' style='display:none'> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名6: <input type="text" class='input' id='name6' placeholder="请输入姓名" name="namesix" value='无'></input><span id='result6' style=color:red></span></div>
+		<div id='div2' style='display:none'> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名7: <input type="text" class='input' id='name7' placeholder="请输入姓名" name="nameseven" value='无'></input><span id='result7' style=color:red></span></div>
+		<div id='div3' style='display:none'> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名8: <input type="text" class='input' id='name8' placeholder="请输入姓名" name="nameeight" value='无'></input><span id='result8' style=color:red></span></div>
+		<div id='div4' style='display:none'> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名9: <input type="text" class='input' id='name9' placeholder="请输入姓名" name="namenine" value='无'></input><span id='result9' style=color:red></span></div>
+		<div id='div5' style='display:none'> 姓&nbsp;&nbsp;&nbsp;&nbsp;名10: <input type="text" class='input' id='name10' placeholder="请输入姓名" name="nameten" value='无'></input><span id='result10' style=color:red></span></div>
+		<br/>
+		<div class='button' id='button1' style='display:block color:yellow'>+添加</div><br/>
+		<button type='submit' class='button' value='提交'>提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="reset" class="button" value="重置">重置</button>
+	</form>
+
+</body>
+</html>
+

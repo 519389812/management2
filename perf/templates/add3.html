@@ -4,6 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content=text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
 <title>绩效登记</title>
 <link rel="stylesheet" type="text/css" href="Login.css"/>  
 
@@ -48,7 +50,7 @@ color: #333;
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-weight: bold;
 }
-.bootstrap-frm input[type="text"], .bootstrap-frm input[type="email"], .bootstrap-frm textarea, .bootstrap-frm select{
+.bootstrap-frm input[type="text"], .bootstrap-frm input[type="date"], .bootstrap-frm textarea, .bootstrap-frm select{
 border: 1px solid #CCC;
 color: #888;
 height: 20px;
@@ -100,57 +102,50 @@ border-color: #ADADAD;
 </head>
 
 <body>
-<form action="" method="post" class="bootstrap-frm">{% csrf_token %}
-<h1>绩效登记
-<span>请按实际情况填写：</span>
-</h1>
-<label>
-<span>姓名 :</span>
-<input id="name" type="text" name="name" placeholder="请输入姓名" required/>
-</label>
-<label>
-<span>室别 :</span><select name="team">
-<option value="一室">一室</option>
-<option value="二室">二室</option>
-<option value="三室">三室</option>
-<option value="团队">团队</option>
-</select>
-</label>
-<label>
-<span>项目 :</span><select name="performance">
-<option value=5.0>挑行李   件/1次</option>
-<option value=20.0>网上值机/小时</option>
-<option value=20.1>团队托运/小时</option>
-<option value=10.0>值夜结关/班（请备注航班）</option>
-<option value=10.1>值夜数票/次</option>
-<option value=15.0>关封/班（请备注航班）</option>
-<option value=20.2>超大/小时</option>
-<option value=20.3>卡大包/小时</option>
-<option value=20.4>Q口引导/小时</option>
-<option value=1.0>加CZ柜台/小时</option>
-<option value=1.1>延时下班/小时</option>
-<option value=1.2>协助481工作/小时（如退关、送旅客、到B区拿行李等）（请备注）</option>
-<option value=1.3>其他工作   /小时/次/班（请备注）</option>
-</select>
-</label>
-<label>
-<span>数值 :</span>
-<input id="values" type="text" name="values" placeholder="请输入多少小时/次/班" required/>
-</label>
-<label>
-<span>日期 :</span>
-<input id="date" type="date" name="date" required/>
-</label>
-<label>
-<span>备注 :</span>
-<textarea id="comment" name="comment" value="无" placeholder="（选填）请备注详细情况"></textarea>
-</label>
-<label>
-<span>&nbsp;</span>
-<input type="submit" class="button" value="提交">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="reset" class="button" value="重置">
-</label>
-</form>
+	<form action="" method="post" class="bootstrap-frm">{% csrf_token %}
+		<h1>绩效登记
+			<span>请按实际情况填写：</span>
+		</h1>
+		<label>
+			<span>姓名 :</span>
+			<input id="name" type="text" name="name" placeholder="请输入姓名" required/>
+		</label>
+		<label>
+			<span>项目 :</span>
+			<select name="performance">
+				<option value=5.0>挑行李   件/1次</option>
+				<option value=20.0>网上值机/小时</option>
+				<option value=20.1>团队托运/小时</option>
+				<option value=10.0>值夜结关/班（请备注航班）</option>
+				<option value=10.1>值夜数票/次</option>
+				<option value=15.0>关封/班（请备注航班）</option>
+				<option value=20.2>超大/小时</option>
+				<option value=20.3>卡大包/小时</option>
+				<option value=20.4>Q口引导/小时</option>
+				<option value=1.0>加CZ柜台/小时</option>
+				<option value=1.1>延时下班/小时</option>
+				<option value=1.2>协助481工作/小时（如退关、送旅客、到B区拿行李等）（请备注）</option>
+				<option value=1.3>其他工作   /小时/次/班（请备注）</option>
+			</select>
+		</label>
+		<label>
+			<span>数值 :</span>
+			<input id="values" type="text" name="values" placeholder="请输入多少小时/次/班" required/>
+		</label>
+		<label>
+			<span>日期 :</span>
+			<input id="date" type="date" name="date" required/>
+		</label>
+		<label>
+			<span>备注 :</span>
+				<input id="comment" type='text' name="comment" value="无" maxlength='40' placeholder="（选填）请备注详细情况"/>
+		</label>
+		<label>
+			<span>&nbsp;</span>
+			<input type="submit" class="button" value="提交">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" class="button" value="重置">
+		</label>
+	</form>
 </body>
 </html>

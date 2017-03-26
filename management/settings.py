@@ -49,6 +49,9 @@ INSTALLED_APPS = [
 	'manager',
 	'perf',
 	'datalib',
+	'administrator',
+	'report',
+	'staff',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -98,7 +101,7 @@ WSGI_APPLICATION = 'management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lib',
+       'NAME': 'lib',
         'USER': 'postgres',
         'PASSWORD': 'zjss123456',
         'HOST': '127.0.0.1',
@@ -187,4 +190,4 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 #上传至heroku时启用
-DATABASES['default'] =  dj_database_url.config()
+#DATABASES['default'] =  dj_database_url.config()

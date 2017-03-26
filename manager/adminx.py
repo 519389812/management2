@@ -7,6 +7,9 @@ from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 from datalib.models import Datalib
 from perf.models import Add,Addother
+from staff.models import Staff
+from administrator.models import Daily
+from report.models import Ranking
 import django.utils.timezone as timezone
 from django.contrib import admin
 from django.http import HttpResponse,HttpResponseRedirect
@@ -74,7 +77,7 @@ class MainDashboard(object):
             #    'o':'-guarantee_date'}},
         ],
         [
-            {"type": "qbutton", "title": "快速访问", "btns": [{"model": "perf.Add", "title": "CZ绩效审核"},{"model": "perf.Addother", "title": "外航绩效审核"},{"url": "https://checkinlib.heroku.com/count", "title": "绩效统计下载"},{"url": "https://checkinlib.heroku.com/countother", "title": "外航统计下载"}]},
+            {"type": "qbutton", "title": "快速访问", "btns":  [{"model": "staff.Staff", "title": "员工档案"},{"model": "perf.Add", "title": "CZ绩效审核"}, {"model": "perf.Addother", "title": "外航绩效审核"},{"model": "administrator.Daily", "title": "检查明细"}, {"url": "https://checkinlib.heroku.com/count", "title": "绩效统计下载"}, {"url": "https://checkinlib.heroku.com/countother", "title": "外航统计下载"},{"url": "https://checkinlib.heroku.com/ranking", "title": "导出质量评分表"}]},
             #{"type": "addform", "model": MaintainLog},
         ]
     ]
@@ -297,3 +300,24 @@ class AddotherAdmin(object):
 	actions = [MyChangeOtherVerifyAction,MyChangeOtherUnverifyAction, ]
 xadmin.site.register(Addother, AddotherAdmin)
 
+class DailyAdmin(object):
+	list_display = ('id','date','subject','airlinecode','nameone','nametwo','namethree','namefour','namefive','namesix','nameseven','nameeight','namenine','nameten')
+	list_display_links = ('id',)
+	list_filter = ('date','subject','airlinecode','nameone','nametwo','namethree','namefour','namefive','namesix','nameseven','nameeight','namenine','nameten')
+	list_editable = ['date','subject','airlinecode', ]
+	search_fields = ('date','subject','airlinecode', )
+	show_detail_fields = ('id',)
+#	readonly_fields = ['other_auth', 'other_verifydate']
+#	actions = [MyChangeOtherVerifyAction,MyChangeOtherUnverifyAction, ]
+xadmin.site.register(Daily, DailyAdmin)
+
+class StaffAdmin(object):
+	list_display = ('id','name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	list_display_links = ('id',)
+	list_filter = ('name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	list_editable = ['name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status', ]
+	search_fields = ('name','eid','wid','group','eqmanage','assistant','groupleader','typing','counting','accountmanage','courseware','af','br','ci','jl','ka','ke','mh','oz','su','sq','tg','vn','status')
+	show_detail_fields = ('id',)
+#	readonly_fields = ['other_auth', 'other_verifydate']
+#	actions = [MyChangeOtherVerifyAction,MyChangeOtherUnverifyAction, ]
+xadmin.site.register(Staff, StaffAdmin)
