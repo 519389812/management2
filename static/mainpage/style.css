@@ -1476,7 +1476,7 @@ Content - About Page
 	color:#f7f7f7;
 	font-size:2em;
 	position:absolute;
-	top:-200px;
+	top:-50px;
 	left:30px;
 }
 #about-container{
@@ -1759,7 +1759,7 @@ Tile Preview (Lightbox)
 	z-index:100;
 }
 .tile-pre-img{
-	max-width:100%;
+	max-width:90%;
 	height:auto;
 	display:block;
 }

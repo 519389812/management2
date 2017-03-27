@@ -280,7 +280,7 @@ $(document).ready(function(){
 	<form action="/addother/" method="post">
 	{% csrf_token %}
 		<br/>
-		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" class='input' id='name1' required=True placeholder="请输入姓名" name="other_name"></input><span id='result1' style=color:red></span></div>
+		<div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" class='input' id='name1' required=True placeholder="请输入姓名" name="other_name"></input><br/><span id='result1' style=color:red></span></div>
 		<div>任务航班&nbsp;&nbsp;&nbsp;&nbsp;: <select type="select" class='select' id='select1' name="airline">
 				<option value=252.0001>AF107</option>
 				<option value=72.0001>BR708</option>
@@ -329,7 +329,7 @@ $(document).ready(function(){
 			<option value=10.004>拉Q</option>
 			<option value=20.001>PRE-FLT</option>
 			<option value=20.002>POST-FLT</option>
-			</select><span id='result2' style=color:red></span></div>
+			</select><br/><span id='result2' style=color:red></span></div>
 		<div id='button1' style='width:350px;text-align:center;display:block'>+点击添加更多项目</div><br/>
 		<div id='div1' style='display:none'>其他任务2&nbsp;&nbsp;: <select type="select" class='select' id='select5' name="taskthree">
 			<option value=0.0>无</option>
@@ -338,7 +338,7 @@ $(document).ready(function(){
 			<option value=10.004>拉Q</option>
 			<option value=20.001>PRE-FLT</option>
 			<option value=20.002>POST-FLT</option>
-			</select><span id='result3' style=color:red></span></div>
+			</select><br/><span id='result3' style=color:red></span></div>
 		<div id='div2' style='display:none'>其他任务3&nbsp;&nbsp;: <select type="select" class='select' id='select6' name="taskfour">
 			<option value=0.0>无</option>
 			<option value=10.002>数票（可选外航：SU、KE）</option>
@@ -346,7 +346,7 @@ $(document).ready(function(){
 			<option value=10.004>拉Q</option>
 			<option value=20.001>PRE-FLT</option>
 			<option value=20.002>POST-FLT</option>
-			</select><span id='result4' style=color:red></div>
+			</select><br/><span id='result4' style=color:red></div>
 		<div id='div3' style='display:none'>额外任务&nbsp;&nbsp;&nbsp;&nbsp;: <select type="select" class='select' id='select7' name="taskfive">
 			<option value=0.0>无</option>
 			<option value=0.501>加外航柜台/小时（请在下方填写时长）</option>
@@ -356,7 +356,7 @@ $(document).ready(function(){
 			<option value=15.002>货机结关/班（请在下方填写航班数，只允许整数）</option>
 			<option value=0.504>不上柜台，临时调配带机组1次（数值固定为1次）</option>
 			</select></div>
-		<div id='div4' style='display:none'>额外任务值: <input type="number" class='input' id='value1' placeholder="请根据额外任务内容填写相关数值" name="task_values" value=0></input><span id='result5' style=color:red></span></div>
+		<div id='div4' style='display:none'>额外任务值: <input type="number" class='input' id='value1' placeholder="请根据额外任务内容填写相关数值" name="task_values" value=0></input><br/><span id='result5' style=color:red></span></div>
 		<div>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期&nbsp;&nbsp;&nbsp;&nbsp;: <input type="date" class='input' id='date1' placeholder="请输入日期" required="required" name="other_date"></div>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type='submit' class='button' value='提交'>提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" class="button" value="重置">重置</button>
