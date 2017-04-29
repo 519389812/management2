@@ -123,11 +123,11 @@ def countother(req):
 					if set.airline == 78.0002 and set.taskone == 10.001:
 						colcustomssq += 1
 					if set.airline == 78.0002 and set.tasktwo == 20.002:
-						postsq += 1
+						colpostsq += 1
 					if set.airline == 78.0002 and set.taskthree == 20.002:
-						postsq += 1
+						colpostsq += 1
 					if set.airline == 78.0002 and set.taskfour == 20.002:
-						postsq += 1
+						colpostsq += 1
 					create = Countother(other_name=set.other_name,other_team=getteam.group,other_workload=set.other_workload,other_point=set.other_point,start_date=date_from,end_date=date_until,ci=colci,ka=colka,customsoz=colcustomsoz,customssq=colcustomssq,postsq=colpostsq)
 					create.save()
 			return HttpResponseRedirect('/other_download/')
