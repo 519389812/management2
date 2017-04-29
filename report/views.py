@@ -84,7 +84,13 @@ def countother(req):
 						get.customsoz += 1
 					if set.airline == 78.0002 and set.taskone == 15.001:
 						get.customssq += 1
-					if set.airline == 78.0002 and set.tasktwo or set.taskthree or set.taskfour == 20.002:
+					if set.airline == 78.0002 and set.taskone == 10.001:
+						get.customssq += 1
+					if set.airline == 78.0002 and set.tasktwo == 20.002:
+						get.postsq += 1
+					if set.airline == 78.0002 and set.taskthree == 20.002:
+						get.postsq += 1
+					if set.airline == 78.0002 and set.taskfour == 20.002:
 						get.postsq += 1
 					get.save()
 				else:
@@ -114,8 +120,14 @@ def countother(req):
 						colcustomsoz += 1
 					if set.airline == 78.0002 and set.taskone == 15.001:
 						colcustomssq += 1
-					if set.airline == 78.0002 and set.tasktwo or set.taskthree or set.taskfour == 20.002:
-						colpostsq += 1
+					if set.airline == 78.0002 and set.taskone == 10.001:
+						colcustomssq += 1
+					if set.airline == 78.0002 and set.tasktwo == 20.002:
+						postsq += 1
+					if set.airline == 78.0002 and set.taskthree == 20.002:
+						postsq += 1
+					if set.airline == 78.0002 and set.taskfour == 20.002:
+						postsq += 1
 					create = Countother(other_name=set.other_name,other_team=getteam.group,other_workload=set.other_workload,other_point=set.other_point,start_date=date_from,end_date=date_until,ci=colci,ka=colka,customsoz=colcustomsoz,customssq=colcustomssq,postsq=colpostsq)
 					create.save()
 			return HttpResponseRedirect('/other_download/')
