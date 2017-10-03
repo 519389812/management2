@@ -253,4 +253,4 @@ def validate(request):
 	elif name == '无':
 		return HttpResponse('')
 	else:
-		return HttpResponse('姓名错误或未录入档案！')
+		return HttpResponse('姓名错误或未录入档案，请联系管理员，否则无法登记！')

@@ -109,7 +109,12 @@ $(document).ready(function(){
 		
 		if (result1 != '输入正确！')
 		{
-		$(this).val(''); 
+		$("#btn1").attr("disabled", true);
+		}
+		
+		else
+		{
+		$("#btn1").attr("disabled", false);
 		}
 	});
 });
@@ -365,7 +370,7 @@ $(document).ready(function(){
 			</select></div>
 		<div id='div4' style='display:none'>额外任务值: <input type="number" class='input' id='value1' placeholder="请根据额外任务内容填写相关数值" name="task_values" value=0></input><br/><span id='result5' style=color:red></span></div>
 		<div>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期&nbsp;&nbsp;&nbsp;&nbsp;: <input type="date" class='input' id='date1' placeholder="请输入日期" required="required" name="other_date"></div>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type='submit' class='button' value='提交'>提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id='btn1' type='submit' class='button' value='提交'>提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" class="button" value="重置">重置</button>
 	</form>
 </body>
