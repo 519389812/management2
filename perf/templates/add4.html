@@ -104,6 +104,13 @@ $(document).ready(function(){
 		$.get("/validate/",{'name':name}, function(ret){
 			$('#result1').html(ret);
 		});
+		
+		var result1 = $('#result1').val();
+		
+		if (result1 != '输入正确！')
+		{
+		$(this).val(''); 
+		}
 	});
 });
 

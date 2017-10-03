@@ -104,6 +104,13 @@ $(document).ready(function(){
 		$.get("/validate/",{'name':name}, function(ret){
 			$('#result1').html(ret);
 		});
+		
+		var result1 = $('#result1').val();
+		
+		if (result1 != '输入正确！')
+		{
+		$(this).val(''); 
+		}
 	});
 });
 
@@ -326,7 +333,7 @@ $(document).ready(function(){
 			</select></div>
 		<div>日&nbsp;&nbsp;&nbsp;&nbsp;期: <input type="date" class='input' id='date1' placeholder="请输入日期" required="required" name="date"></div>
 		<div>备&nbsp;&nbsp;&nbsp;&nbsp;注: <input type="textarea" class='input' id='comment1' placeholder="填写如关封航班号、退关航班号和协助481的具体工作" maxlength=40 name="comment" value='无'></input></div>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type='submit' class='button' value='提交'>提交</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id='btn1' type='submit' class='button' value='提交'>提交</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" class="button" value="重置">重置</button>
 	</form>
 </body>
