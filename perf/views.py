@@ -249,8 +249,8 @@ def validate(request):
 	for get in allname:
 		namelist.append(get.name)
 	if name in namelist:
-		return HttpResponse('输入正确')
+		return HttpResponse('输入正确！')
 	elif name == '无':
 		return HttpResponse('')
 	else:
-		return HttpResponse('姓名错误或未录入档案，请联系管理员，否则无法登记！')
+		return HttpResponse('姓名错误或未录入档案！')
