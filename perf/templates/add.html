@@ -107,14 +107,14 @@ $(document).ready(function(){
 		
 		var result1 = $('#result1').val();
 		
-		if (result1 != '输入正确！')
+		if (result1 != '输入正确')
 		{
 		$("#btn1").attr("disabled", true);
 		}
 		
 		else
 		{
-		$("#btn1").attr("disabled", false);
+		$("#btn1").removeAttr("disabled");
 		}
 	});
 });

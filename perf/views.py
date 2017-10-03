@@ -249,7 +249,7 @@ def validate(request):
 	for get in allname:
 		namelist.append(get.name)
 	if name in namelist:
-		return HttpResponse('输入正确！')
+		return HttpResponse('输入正确')
 	elif name == '无':
 		return HttpResponse('')
 	else:
