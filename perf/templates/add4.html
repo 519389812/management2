@@ -119,6 +119,31 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
+	$('#select2').change(function(){
+		var thisvalue = $(this).val(); 
+		var airline = $('#select1').val();
+		
+		if (airline == 19.24)
+		{
+			if (thisvalue == 1.1)
+			{
+				$(this).val(0.0);
+				$('#result6').html('3U仅组长需登记');
+			}
+			
+			else if(thisvalue == 1.2)
+			{
+				$(this).val(0.0);
+				$('#result6').html('3U仅组长需登记');
+			}
+			
+			else
+			{
+				$('#result6').html('');
+			}
+		}
+	});
+
 	$('#select4').change(function(){
 		var thisvalue = $(this).val(); 
 		var airline = $('#select1').val();
@@ -129,6 +154,20 @@ $(document).ready(function(){
 			{
 				$(this).val(0.0);
 				$('#result2').html('仅SU、KE可选');
+			}
+			
+			else
+			{
+				$('#result2').html('');
+			}
+		}
+			
+		if (airline != 19.24)
+		{
+			if (thisvalue == 20.003)
+			{
+				$(this).val(0.0);
+				$('#result2').html('仅3U可选');
 			}
 			
 			else
@@ -321,13 +360,14 @@ $(document).ready(function(){
 				<option value=78.0004>VN507</option>
 				<option value=109.2001>VN503留守</option>
 				<option value=93.6001>VN549</option>
+				<option value=19.24>3U川航</option>
 				</select></div>
 		<div>任务舱位&nbsp;&nbsp;&nbsp;&nbsp;: <select type="select" class='select' id='select2' name="taskclass">
 			<option value=0.0>无</option>
 			<option value=1.3>组长 + F/C舱</option>
 			<option value=1.2>F/C舱</option>
 			<option value=1.1>Y舱</option>
-			</select></div>
+			</select><br/><span id='result6' style=color:red></span></div>
 		<div>结关送机&nbsp;&nbsp;&nbsp;&nbsp;: <select type="select" class='select' id='select3' name="taskone">
 			<option value=0.0>无</option>
 			<option value=10.001>结关（至边检）</option>
@@ -335,16 +375,17 @@ $(document).ready(function(){
 			</select></div>
 		<div>其他任务1&nbsp;&nbsp;: <select type="select" class='select' id='select4' name="tasktwo">
 			<option value=0.0>无</option>
-			<option value=10.002>数票（可选外航：SU、KE）</option>
+			<option value=10.002>数票（仅：SU、KE）</option>
 			<option value=10.003>电报</option>
 			<option value=10.004>拉Q</option>
 			<option value=20.001>PRE-FLT</option>
 			<option value=20.002>POST-FLT</option>
+			<option value=20.003>带机组（仅3U）</option>
 			</select><br/><span id='result2' style=color:red></span></div>
 		<div id='button1' style='width:350px;text-align:center;display:block'>+点击添加更多项目</div><br/>
 		<div id='div1' style='display:none'>其他任务2&nbsp;&nbsp;: <select type="select" class='select' id='select5' name="taskthree">
 			<option value=0.0>无</option>
-			<option value=10.002>数票（可选外航：SU、KE）</option>
+			<option value=10.002>数票（仅：SU、KE）</option>
 			<option value=10.003>电报</option>
 			<option value=10.004>拉Q</option>
 			<option value=20.001>PRE-FLT</option>
