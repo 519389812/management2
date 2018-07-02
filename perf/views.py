@@ -59,7 +59,7 @@ def add(req):
 				workload_one = int(perf_num)*values_num
 			elif perf_num == 10.0:
 				workload_one = int(perf_num)*values_num
-			elif perf_num == 10.1:
+			elif perf_num == 30.1:
 				workload_one = int(perf_num)*values_num
 			elif perf_num == 15.0:
 				workload_one = int(perf_num)*values_num
@@ -92,7 +92,7 @@ def add(req):
 				workload_two = int(perf_numtwo)*values_numtwo
 			elif perf_numtwo == 10.0:
 				workload_two = int(perf_numtwo)*values_numtwo
-			elif perf_numtwo == 10.1:
+			elif perf_numtwo == 30.1:
 				workload_two = int(perf_numtwo)*values_numtwo
 			elif perf_numtwo == 15.0:
 				workload_two = int(perf_numtwo)*values_numtwo
@@ -125,7 +125,7 @@ def add(req):
 				workload_three = int(perf_numthree)*values_numthree
 			elif perf_numthree == 10.0:
 				workload_three = int(perf_numthree)*values_numthree
-			elif perf_numthree == 10.1:
+			elif perf_numthree == 30.1:
 				workload_three = int(perf_numthree)*values_numthree
 			elif perf_numthree == 15.0:
 				workload_three = int(perf_numthree)*values_numthree
