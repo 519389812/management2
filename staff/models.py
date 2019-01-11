@@ -27,7 +27,7 @@ class Staff(models.Model):
 
 		
 	def __unicode__(self):
-		return u'姓名：%s | 工号：%s | 室组：%s'%(self.name,self.eid,self.group)
+		return u'姓名：%s | 工号：%s'%(self.name,self.group)
 
 	class Meta:
 		verbose_name='员工档案'
